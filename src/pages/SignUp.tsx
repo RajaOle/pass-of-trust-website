@@ -5,15 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { countries, Country } from "@/data/countries";
 
 interface FormData {
   email: string;
   phoneNumber: string;
   password: string;
   confirmPassword: string;
+  selectedCountry: Country;
 }
 
 interface FormErrors {
@@ -29,6 +32,7 @@ const SignUp = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    selectedCountry: countries[0], // Default to US
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -42,20 +46,16 @@ const SignUp = () => {
   };
 
   const validatePhoneNumber = (phone: string) => {
-    // International phone number validation (E.164 format)
-    const phoneRegex = /^\+[1-9]\d{1,14}$/;
-    return phoneRegex.test(phone);
+    // Remove spaces and check if it's a valid number
+    const cleanPhone = phone.replace(/\s/g, '');
+    // Should be between 7-15 digits (international standard)
+    const phoneRegex = /^\d{7,15}$/;
+    return phoneRegex.test(cleanPhone);
   };
 
   const formatPhoneNumber = (value: string) => {
-    // Remove all non-digit characters except +
-    let cleaned = value.replace(/[^\d+]/g, '');
-    
-    // Ensure it starts with +
-    if (!cleaned.startsWith('+')) {
-      cleaned = '+' + cleaned;
-    }
-    
+    // Remove all non-digit characters
+    let cleaned = value.replace(/\D/g, '');
     return cleaned;
   };
 
@@ -75,6 +75,13 @@ const SignUp = () => {
     }
   };
 
+  const handleCountryChange = (countryCode: string) => {
+    const selectedCountry = countries.find(c => c.code === countryCode);
+    if (selectedCountry) {
+      setFormData(prev => ({ ...prev, selectedCountry }));
+    }
+  };
+
   const validateForm = () => {
     const newErrors: FormErrors = {};
 
@@ -87,7 +94,7 @@ const SignUp = () => {
     if (!formData.phoneNumber) {
       newErrors.phoneNumber = 'Phone number is required';
     } else if (!validatePhoneNumber(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Please enter a valid international phone number (e.g., +1234567890)';
+      newErrors.phoneNumber = 'Please enter a valid phone number';
     }
 
     if (!formData.password) {
@@ -119,6 +126,9 @@ const SignUp = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Log the complete phone number for debugging
+      console.log('Complete phone number:', `${formData.selectedCountry.dialCode}${formData.phoneNumber}`);
+      
       toast({
         title: "Account created successfully!",
         description: "Welcome to Goodpass. Please check your email to verify your account.",
@@ -130,6 +140,7 @@ const SignUp = () => {
         phoneNumber: "",
         password: "",
         confirmPassword: "",
+        selectedCountry: countries[0],
       });
     } catch (error) {
       toast({
@@ -266,21 +277,47 @@ const SignUp = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="phoneNumber">Phone number</Label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    type="tel"
-                    autoComplete="tel"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
-                    className={`pl-10 ${errors.phoneNumber ? 'border-red-500' : ''}`}
-                    placeholder="+1234567890"
-                  />
+                <div className="flex space-x-2">
+                  <Select 
+                    value={formData.selectedCountry.code} 
+                    onValueChange={handleCountryChange}
+                  >
+                    <SelectTrigger className="w-32">
+                      <SelectValue>
+                        <div className="flex items-center space-x-2">
+                          <span>{formData.selectedCountry.flag}</span>
+                          <span className="text-sm">{formData.selectedCountry.dialCode}</span>
+                        </div>
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60 bg-white">
+                      {countries.map((country) => (
+                        <SelectItem key={country.code} value={country.code}>
+                          <div className="flex items-center space-x-2">
+                            <span>{country.flag}</span>
+                            <span className="text-sm">{country.name}</span>
+                            <span className="text-sm text-gray-500">{country.dialCode}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <div className="relative flex-1">
+                    <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      type="tel"
+                      autoComplete="tel"
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                      className={`pl-10 ${errors.phoneNumber ? 'border-red-500' : ''}`}
+                      placeholder="123456789"
+                    />
+                  </div>
                 </div>
                 <p className="text-xs text-gray-500">
-                  Include country code (e.g., +1 for US, +44 for UK)
+                  Selected: {formData.selectedCountry.dialCode}{formData.phoneNumber ? formData.phoneNumber : 'xxxxxxxxx'}
                 </p>
                 {errors.phoneNumber && (
                   <p className="text-sm text-red-600">{errors.phoneNumber}</p>
@@ -363,6 +400,30 @@ const SignUp = () => {
       </div>
     </div>
   );
+};
+
+const handleGoogleSignUp = () => {
+  // In a real implementation, this would integrate with Google OAuth
+  toast({
+    title: "Google Sign Up",
+    description: "Google OAuth integration would be implemented here.",
+  });
+};
+
+const handleFacebookSignUp = () => {
+  // In a real implementation, this would integrate with Facebook OAuth
+  toast({
+    title: "Facebook Sign Up",
+    description: "Facebook OAuth integration would be implemented here.",
+  });
+};
+
+const handleLinkedInSignUp = () => {
+  // In a real implementation, this would integrate with LinkedIn OAuth
+  toast({
+    title: "LinkedIn Sign Up",
+    description: "LinkedIn OAuth integration would be implemented here.",
+  });
 };
 
 export default SignUp;
