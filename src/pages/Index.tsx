@@ -29,9 +29,9 @@ const Index = () => {
               <Link to="/developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Developers
               </Link>
-              <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
+              <Link to="/pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Pricing
-              </a>
+              </Link>
             </nav>
 
             {/* Auth Buttons */}
@@ -64,9 +64,9 @@ const Index = () => {
                 <Link to="/developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Developers
                 </Link>
-                <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
+                <Link to="/pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Pricing
-                </a>
+                </Link>
                 <div className="flex flex-col space-y-2 pt-3 border-t border-gray-100">
                   <Button variant="ghost" className="text-gray-700 justify-start px-2">
                     Login
