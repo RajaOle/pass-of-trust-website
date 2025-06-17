@@ -1,10 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const TermsOfUse = () => {
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +25,8 @@ const TermsOfUse = () => {
           
           <div className="space-y-8 text-gray-700">
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. WHO WE ARE &amp; WHAT WE DO
+            </h2>
               <p className="leading-relaxed mb-4">
                 By accessing and using the Goodpass platform, you accept and agree to be bound by the terms and 
                 provision of this agreement. If you do not agree to abide by the above, please do not use this service.
@@ -157,8 +155,6 @@ const TermsOfUse = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default TermsOfUse;
