@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
@@ -34,7 +35,7 @@ const MakeReport = () => {
             Make a Report
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Join Goodpass to build trust and transparency in your financial community. Whether you're an individual or an institution, contributing to our platform helps create a more inclusive financial ecosystem.
+            Join Goodpass to build trust and transparency in your community. Whether you're an individual or an institution, contributing to our platform helps create a more inclusive ecosystem.
           </p>
         </div>
 
