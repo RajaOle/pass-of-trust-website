@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,6 +26,16 @@ interface FormErrors {
   confirmPassword?: string;
 }
 
+interface PasswordValidationErrors {
+  minLength?: boolean;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  number?: boolean;
+  specialChar?: boolean;
+  noSpaces?: boolean;
+  match?: boolean;
+}
+
 const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
     email: "",
@@ -36,6 +47,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [passwordValidationErrors, setPasswordValidationErrors] = useState<PasswordValidationErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -50,6 +62,47 @@ const SignUp = () => {
     // Should be between 7-15 digits (international standard)
     const phoneRegex = /^\d{7,15}$/;
     return phoneRegex.test(cleanPhone);
+  };
+
+  const validatePassword = (password: string, confirmPassword: string = "") => {
+    const validationErrors: PasswordValidationErrors = {};
+    
+    // Minimum length of 8 characters
+    if (password.length < 8) {
+      validationErrors.minLength = true;
+    }
+    
+    // Contains at least one uppercase letter (A-Z)
+    if (!/[A-Z]/.test(password)) {
+      validationErrors.uppercase = true;
+    }
+    
+    // Contains at least one lowercase letter (a-z)
+    if (!/[a-z]/.test(password)) {
+      validationErrors.lowercase = true;
+    }
+    
+    // Contains at least one number (0-9)
+    if (!/[0-9]/.test(password)) {
+      validationErrors.number = true;
+    }
+    
+    // Contains at least one special character (!@#$%^&*)
+    if (!/[!@#$%^&*]/.test(password)) {
+      validationErrors.specialChar = true;
+    }
+    
+    // Contains no spaces
+    if (/\s/.test(password)) {
+      validationErrors.noSpaces = true;
+    }
+    
+    // Password and confirm password are identical
+    if (confirmPassword && password !== confirmPassword) {
+      validationErrors.match = true;
+    }
+    
+    return validationErrors;
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -71,6 +124,17 @@ const SignUp = () => {
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+
+    // Validate password in real-time
+    if (name === 'password') {
+      const validationErrors = validatePassword(value, formData.confirmPassword);
+      setPasswordValidationErrors(validationErrors);
+    }
+    
+    if (name === 'confirmPassword') {
+      const validationErrors = validatePassword(formData.password, value);
+      setPasswordValidationErrors(validationErrors);
     }
   };
 
@@ -98,14 +162,15 @@ const SignUp = () => {
 
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters long';
+    } else {
+      const passwordValidation = validatePassword(formData.password, formData.confirmPassword);
+      if (Object.keys(passwordValidation).length > 0) {
+        newErrors.password = 'Password does not meet all requirements';
+      }
     }
 
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
     }
 
     setErrors(newErrors);
@@ -141,6 +206,7 @@ const SignUp = () => {
         confirmPassword: "",
         selectedCountry: countries[0],
       });
+      setPasswordValidationErrors({});
     } catch (error) {
       toast({
         title: "Error",
@@ -347,6 +413,30 @@ const SignUp = () => {
                 {errors.password && (
                   <p className="text-sm text-red-600">{errors.password}</p>
                 )}
+                
+                {/* Password validation errors */}
+                {Object.keys(passwordValidationErrors).length > 0 && (
+                  <div className="space-y-1">
+                    {passwordValidationErrors.minLength && (
+                      <p className="text-sm text-red-600">• Password must be at least 8 characters long</p>
+                    )}
+                    {passwordValidationErrors.uppercase && (
+                      <p className="text-sm text-red-600">• Password must contain at least one uppercase letter (A-Z)</p>
+                    )}
+                    {passwordValidationErrors.lowercase && (
+                      <p className="text-sm text-red-600">• Password must contain at least one lowercase letter (a-z)</p>
+                    )}
+                    {passwordValidationErrors.number && (
+                      <p className="text-sm text-red-600">• Password must contain at least one number (0-9)</p>
+                    )}
+                    {passwordValidationErrors.specialChar && (
+                      <p className="text-sm text-red-600">• Password must contain at least one special character (!@#$%^&*)</p>
+                    )}
+                    {passwordValidationErrors.noSpaces && (
+                      <p className="text-sm text-red-600">• Password must not contain spaces</p>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -372,6 +462,11 @@ const SignUp = () => {
                 </div>
                 {errors.confirmPassword && (
                   <p className="text-sm text-red-600">{errors.confirmPassword}</p>
+                )}
+                
+                {/* Password match validation */}
+                {passwordValidationErrors.match && (
+                  <p className="text-sm text-red-600">• Passwords do not match</p>
                 )}
               </div>
 
