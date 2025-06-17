@@ -1,9 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const MakeReport = () => {
   return <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -114,9 +112,7 @@ const MakeReport = () => {
                   
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2 text-center">Reduce Lending Risks</h3>
-                    <p className="text-gray-600 text-sm">
-                      Providing accurate data to Goodpass's platform allows institutions to leverage comprehensive credit behavior insights, minimizing default risks and improving loan decision-making.
-                    </p>
+                    <p className="text-gray-600 text-sm">Providing accurate data to Goodpass's platform allows institutions to leverage comprehensive credit behavior insights, minimizing the business community for a non-payment fraud risk</p>
                   </div>
                   
                   <div>
@@ -154,5 +150,4 @@ const MakeReport = () => {
       </main>
     </div>;
 };
-
 export default MakeReport;
