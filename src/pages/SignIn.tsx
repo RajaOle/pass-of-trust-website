@@ -6,15 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Eye, EyeOff, Mail, Phone, Chrome, Facebook, Linkedin } from "lucide-react";
+import { Eye, EyeOff, Chrome, Facebook, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginMethod, setLoginMethod] = useState<"email" | "phone">("email");
   const [formData, setFormData] = useState({
-    email: "",
-    phone: "",
+    emailOrPhone: "",
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +35,7 @@ const SignIn = () => {
       setIsLoading(false);
       toast({
         title: "Sign In Successful",
-        description: `Welcome back! Signed in with ${loginMethod === "email" ? formData.email : formData.phone}`,
+        description: `Welcome back! Signed in with ${formData.emailOrPhone}`,
       });
     }, 1500);
   };
@@ -50,18 +48,10 @@ const SignIn = () => {
   };
 
   const handleForgotPassword = () => {
-    if (loginMethod === "email" && !formData.email) {
+    if (!formData.emailOrPhone) {
       toast({
-        title: "Email Required",
-        description: "Please enter your email address first.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (loginMethod === "phone" && !formData.phone) {
-      toast({
-        title: "Phone Number Required",
-        description: "Please enter your phone number first.",
+        title: "Email or Phone Required",
+        description: "Please enter your email address or phone number first.",
         variant: "destructive",
       });
       return;
@@ -69,7 +59,7 @@ const SignIn = () => {
 
     toast({
       title: "Password Reset",
-      description: `Password reset instructions sent to your ${loginMethod === "email" ? "email" : "phone number"}.`,
+      description: "Password reset instructions sent to your email or phone number.",
     });
   };
 
@@ -93,55 +83,23 @@ const SignIn = () => {
           <CardHeader className="space-y-1">
             <CardTitle className="text-xl text-center">Sign In</CardTitle>
             <CardDescription className="text-center">
-              Choose your preferred sign-in method
+              Enter your credentials to access your account
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Login Method Toggle */}
-            <div className="flex rounded-lg bg-gray-100 p-1">
-              <button
-                type="button"
-                onClick={() => setLoginMethod("email")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-                  loginMethod === "email"
-                    ? "bg-white text-blue-600 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                <Mail className="w-4 h-4" />
-                Email
-              </button>
-              <button
-                type="button"
-                onClick={() => setLoginMethod("phone")}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-                  loginMethod === "phone"
-                    ? "bg-white text-blue-600 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                <Phone className="w-4 h-4" />
-                Phone
-              </button>
-            </div>
-
             {/* Sign In Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Email/Phone Input */}
               <div className="space-y-2">
-                <Label htmlFor={loginMethod}>
-                  {loginMethod === "email" ? "Email Address" : "Phone Number"}
+                <Label htmlFor="emailOrPhone">
+                  Login by your email or phone
                 </Label>
                 <Input
-                  id={loginMethod}
-                  name={loginMethod}
-                  type={loginMethod === "email" ? "email" : "tel"}
-                  placeholder={
-                    loginMethod === "email" 
-                      ? "Enter your email address" 
-                      : "Enter your phone number"
-                  }
-                  value={loginMethod === "email" ? formData.email : formData.phone}
+                  id="emailOrPhone"
+                  name="emailOrPhone"
+                  type="text"
+                  placeholder="Enter your email address or phone number"
+                  value={formData.emailOrPhone}
                   onChange={handleInputChange}
                   required
                   className="h-12"
