@@ -1,25 +1,17 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
 import { useState } from "react";
-
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/Goodpass logo.png" 
-                alt="Goodpass" 
-                className="h-6 sm:h-8 w-auto"
-              />
+              <img alt="Goodpass" className="h-6 sm:h-8 w-auto" src="/lovable-uploads/322b1780-03c2-42ca-9d1b-e4bf6b49a3fe.png" />
             </div>
 
             {/* Desktop Navigation */}
@@ -49,11 +41,7 @@ const Index = () => {
             </div>
 
             {/* Mobile menu button */}
-            <button
-              className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
+            <button className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
               <div className={`w-5 h-0.5 bg-gray-600 mb-1 transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
               <div className={`w-5 h-0.5 bg-gray-600 mb-1 transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`}></div>
               <div className={`w-5 h-0.5 bg-gray-600 transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
@@ -61,8 +49,7 @@ const Index = () => {
           </div>
 
           {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="lg:hidden py-4 border-t border-gray-100 bg-white">
+          {isMenuOpen && <div className="lg:hidden py-4 border-t border-gray-100 bg-white">
               <div className="flex flex-col space-y-3">
                 <a href="#report" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make a Report
@@ -85,8 +72,7 @@ const Index = () => {
                   </Button>
                 </div>
               </div>
-            </div>
-          )}
+            </div>}
         </div>
       </header>
 
@@ -195,11 +181,7 @@ const Index = () => {
             </div>
             <div className="text-center order-1 lg:order-2">
               <div className="relative inline-block">
-                <img 
-                  src="/lovable-uploads/Goodpass icon 3xxx.png" 
-                  alt="Goodpass Security" 
-                  className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-                />
+                <img src="/lovable-uploads/Goodpass icon 3xxx.png" alt="Goodpass Security" className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -226,11 +208,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/Goodpass logo.png" 
-                alt="Goodpass" 
-                className="h-5 sm:h-6 w-auto"
-              />
+              <img alt="Goodpass" className="h-5 sm:h-6 w-auto" src="/lovable-uploads/a509c38c-b7f5-420f-b014-fb9bec51257c.png" />
             </div>
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 lg:space-x-8 text-sm text-gray-600">
               <a href="#terms" className="hover:text-blue-600 transition-colors text-center">
@@ -249,8 +227,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
