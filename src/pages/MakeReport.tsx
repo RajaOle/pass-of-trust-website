@@ -1,5 +1,4 @@
 
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
@@ -18,9 +17,11 @@ const MakeReport = () => {
               <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
                 Home
               </Link>
-              <Button variant="ghost" className="text-gray-700 hover:text-blue-600">
-                Login
-              </Button>
+              <Link to="/signin">
+                <Button variant="ghost" className="text-gray-700 hover:text-blue-600">
+                  Login
+                </Button>
+              </Link>
               <Link to="/signup">
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                   Sign Up
@@ -155,4 +156,3 @@ const MakeReport = () => {
 };
 
 export default MakeReport;
-
