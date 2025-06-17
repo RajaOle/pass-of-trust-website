@@ -9,8 +9,22 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff, Mail, Phone } from "lucide-react";
 
+interface FormData {
+  email: string;
+  phoneNumber: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface FormErrors {
+  email?: string;
+  phoneNumber?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
 const SignUp = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     email: "",
     phoneNumber: "",
     password: "",
@@ -18,7 +32,7 @@ const SignUp = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -56,13 +70,13 @@ const SignUp = () => {
     }
     
     // Clear error when user starts typing
-    if (errors[name as keyof typeof errors]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   const validateForm = () => {
-    const newErrors: any = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.email) {
       newErrors.email = 'Email is required';
