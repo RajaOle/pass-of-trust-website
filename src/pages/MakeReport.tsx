@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
@@ -84,8 +83,7 @@ const MakeReport = () => {
           {/* Section 2: Institutions */}
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center text-green-600 text-3xl text-center">
-                <Building2 className="w-6 h-6 mr-2" />
+              <CardTitle className="text-green-600 text-3xl text-center">
                 Why Institutions Should Contribute to Goodpass Commitment Reports
               </CardTitle>
             </CardHeader>
