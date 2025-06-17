@@ -1,12 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const MakeReport = () => {
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,37 +41,33 @@ const MakeReport = () => {
           {/* Section 1: Individuals */}
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center text-xl text-blue-600">
+              <CardTitle className="flex items-center text-blue-600 text-3xl text-center">
                 <User className="w-6 h-6 mr-2" />
                 Why Individuals Should Contribute to Goodpass Reports
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" 
-                  alt="Woman using laptop for financial planning"
-                  className="w-full h-full object-cover"
-                />
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Woman using laptop for financial planning" className="w-full h-full object-cover" />
               </div>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Build Your Credit Profile</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Build Your Credit Profile</h3>
                   <p className="text-gray-600 text-sm">
                     By contributing to or creating reports on Goodpass, individuals can establish a trusted GP Score, improving their chances of securing loans from banks or investors, even without a formal credit history.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Strengthen Community Trust</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Strengthen Community Trust</h3>
                   <p className="text-gray-600 text-sm">
                     Reporting accurate loan or behavioral data on Goodpass fosters transparency, helping individuals build a reputation for reliability and trustworthiness within their community.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Simplify Personal Lending</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Simplify Personal Lending</h3>
                   <p className="text-gray-600 text-sm">
                     Goodpass automates tracking and reminders for informal loans, reducing awkwardness and ensuring smoother financial interactions with peers, while contributing to a shared credit ecosystem.
                   </p>
@@ -90,18 +83,14 @@ const MakeReport = () => {
           {/* Section 2: Institutions */}
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center text-xl text-green-600">
+              <CardTitle className="flex items-center text-green-600 text-3xl text-center">
                 <Building2 className="w-6 h-6 mr-2" />
                 Why Institutions Should Contribute to Goodpass Commitment Reports
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" 
-                  alt="Group of people around display screens in professional setting"
-                  className="w-full h-full object-cover"
-                />
+                <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" alt="Group of people around display screens in professional setting" className="w-full h-full object-cover" />
               </div>
               
               <div className="space-y-4">
@@ -147,8 +136,6 @@ const MakeReport = () => {
           </p>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default MakeReport;
