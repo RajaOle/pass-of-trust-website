@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
@@ -122,9 +121,11 @@ const MakeReport = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                Start Institution Report
-              </Button>
+              <Link to="/signup">
+                <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                  Start Institution Report
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>
