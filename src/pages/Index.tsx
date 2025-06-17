@@ -1,10 +1,14 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
 import { useState } from "react";
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,9 +210,15 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <div className="flex items-center">
-              <img alt="Goodpass" className="h-5 sm:h-6 w-auto" src="/lovable-uploads/a509c38c-b7f5-420f-b014-fb9bec51257c.png" />
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0">
+            <div className="flex flex-col items-center lg:items-start space-y-4">
+              <img alt="Goodpass" className="h-6 sm:h-8 w-auto" src="/lovable-uploads/322b1780-03c2-42ca-9d1b-e4bf6b49a3fe.png" />
+              <div className="text-center lg:text-left">
+                <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
+                  160 Robinson Road, #14-04 Singapore Business Federation Center<br />
+                  Singapore (068914)
+                </p>
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 lg:space-x-8 text-sm text-gray-600">
               <a href="#terms" className="hover:text-blue-600 transition-colors text-center">
@@ -222,11 +232,14 @@ const Index = () => {
               </a>
             </div>
           </div>
-          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200 text-center text-gray-500 text-xs sm:text-sm">
-            © 2024 Goodpass. All rights reserved.
+          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200 text-center text-gray-500 text-xs sm:text-sm space-y-2">
+            <p>Copyright © 2025 GoodPass</p>
+            <p>Powered by GoodPass</p>
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
