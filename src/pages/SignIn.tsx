@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -132,13 +131,12 @@ const SignIn = () => {
 
               {/* Forgot Password */}
               <div className="text-right">
-                <button
-                  type="button"
-                  onClick={handleForgotPassword}
+                <Link
+                  to="/forgot-password"
                   className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
                 >
                   Forgot password?
-                </button>
+                </Link>
               </div>
 
               {/* Sign In Button */}
