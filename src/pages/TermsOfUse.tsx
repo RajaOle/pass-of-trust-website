@@ -73,7 +73,8 @@ DEFINITIONS
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Use License</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. DEFINITIONS
+            </h2>
               <p className="leading-relaxed mb-4">
                 Permission is granted to temporarily download one copy of the materials on Goodpass's website for 
                 personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
