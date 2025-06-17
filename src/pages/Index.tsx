@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
@@ -21,9 +20,9 @@ const Index = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              <a href="#report" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
+              <Link to="/makereport" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Make a Report
-              </a>
+              </Link>
               <a href="#inquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Make Inquiries
               </a>
@@ -56,9 +55,9 @@ const Index = () => {
           {/* Mobile Navigation */}
           {isMenuOpen && <div className="lg:hidden py-4 border-t border-gray-100 bg-white">
               <div className="flex flex-col space-y-3">
-                <a href="#report" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
+                <Link to="/makereport" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make a Report
-                </a>
+                </Link>
                 <a href="#inquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make Inquiries
                 </a>
