@@ -45,31 +45,7 @@ We DO NOT provide access to direct funding, loans, investments or any financial 
 
 These Goodpass Terms of Use (“TOU”) are the terms that apply to your use of the Goodpass.  We hope that these will help ensure the community is valuable to you and serves as a platform where we can all become better together. These Community TOU also protect the interests of all of our members, as well as our goodwill and reputation. These terms are so important that we cannot permit you to use the Goodpass unless you agree to them. By using the Goodpass, you are agreeing to these terms.
 
-Every community user of ours agrees to abide by these Community TOU and is responsible for any violations. You are not allowed to assist or engage others in a way that would violate these Community TOU. We will enforce and ensure compliance with this Community TOU by using methods we consider to be appropriate.
-
-
-
-DEFINITIONS
-
-(“Agreement”) or (“Community TOU”) means these Goodpass, Terms of Use and all materials referred or linked to in here.
-
-(“Community”) means other members of the Goodpass, including yourself.
-
-(“Community Content”) means all content, including without limitation, language, data, information, and images, provided through or disclosed by the use of the Goodpass, whether by us, our customers or other members by the communities. Community Content, does not include Your Content.
-
-(“Sensitive Information”) means debit or credit card number, personal financial information, national identity or passports documents, driver license, bank account numbers, financial or health information, fraud report, loan report, including any information subject to regulations, laws, or industry standards designed to protect data privacy and security.
-
-(“Third Party Sites”) Means any third party services or websites linked from within or accessed through Goodpass App
-
-(“You”) means the person or entity using Goodpass 
-
-(“Your Content”) means all content, including without limitation, language, data, information, and images, provided through or disclosed by the use of the Goodpass, provided by You.
-
-(“We, Us, Our, Goodpass, Goodpass App, Goodpass Score or Goodpass”) means Goodpass App which is owned by PT Digital Venture International, a company registered in and under the law of Indonesia.
-
-(“Reporter”) is the person or entity, submitting a report about loan commitment, fraud or other reports, whether the file is provided by Your Content, or a Community Content.
-
-(“Reportee”) is the person or entity being reported by Your or by the Community.</p>
+Every community user of ours agrees to abide by these Community TOU and is responsible for any violations. You are not allowed to assist or engage others in a way that would violate these Community TOU. We will enforce and ensure compliance with this Community TOU by using methods we consider to be appropriate.</p>
             </section>
 
             <section>
