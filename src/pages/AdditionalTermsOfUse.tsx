@@ -27,184 +27,51 @@ const AdditionalTermsOfUse = () => {
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">Additional Terms of Use</h1>
           
           <div className="space-y-8 text-gray-700">
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">ADDITIONAL COMMUNITY GUIDELINES</h2>
-              <p className="leading-relaxed mb-4">
-                These Additional Terms of Use supplement the main Terms of Use and provide specific guidelines for community participation and content creation within the Goodpass platform.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">CONTENT STANDARDS</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Prohibited Content</h3>
-                <p className="leading-relaxed mb-4">
-                  Users must not post content that:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Contains false, misleading, or defamatory information</li>
-                  <li>Violates privacy rights of individuals</li>
-                  <li>Includes hate speech or discriminatory language</li>
-                  <li>Contains spam, promotional content, or unsolicited advertisements</li>
-                  <li>Infringes on intellectual property rights</li>
-                  <li>Includes malicious code or harmful software</li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">REPORTING STANDARDS</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Accuracy Requirements</h3>
-                <p className="leading-relaxed mb-4">
-                  All reports submitted to the platform must be:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Based on factual information and direct experience</li>
-                  <li>Supported by appropriate documentation when required</li>
-                  <li>Free from personal bias or emotional language</li>
-                  <li>Relevant to financial conduct and creditworthiness</li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">VERIFICATION PROCESS</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Identity Verification</h3>
-                <p className="leading-relaxed mb-4">
-                  To maintain platform integrity, users may be required to complete identity verification through:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Government-issued identification documents</li>
-                  <li>Email and phone number verification</li>
-                  <li>Address confirmation</li>
-                  <li>Social media profile verification</li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">DISPUTE RESOLUTION</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Reporting Disputes</h3>
-                <p className="leading-relaxed mb-4">
-                  If you believe a report about you is inaccurate or unfair, you may:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Contact our support team with evidence of inaccuracy</li>
-                  <li>Request mediation between parties involved</li>
-                  <li>Provide counter-documentation to support your position</li>
-                  <li>Request temporary suspension of the disputed report during review</li>
-                </ul>
-                
-                <h3 className="text-lg font-medium text-gray-900 mt-6">Resolution Timeline</h3>
-                <p className="leading-relaxed mb-4">
-                  We aim to resolve disputes within 14 business days of receiving a complete dispute request with supporting documentation.
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">SCORE CALCULATION</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Scoring Methodology</h3>
-                <p className="leading-relaxed mb-4">
-                  Your Goodpass score is calculated based on:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Payment history and timeliness (40%)</li>
-                  <li>Amount of credit utilized (30%)</li>
-                  <li>Length of credit relationships (15%)</li>
-                  <li>Types of credit accounts (10%)</li>
-                  <li>Community feedback and ratings (5%)</li>
-                </ul>
-                
-                <h3 className="text-lg font-medium text-gray-900 mt-6">Score Updates</h3>
-                <p className="leading-relaxed mb-4">
-                  Scores are updated monthly, with significant changes reflected within 7 business days of verified report submission.
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">DATA RETENTION</h2>
-              <p className="leading-relaxed mb-4">
-                We retain user data and reports according to the following schedule:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Positive reports: Retained indefinitely unless user requests removal</li>
-                <li>Negative reports: Retained for 7 years from date of resolution</li>
-                <li>Account information: Retained for 2 years after account closure</li>
-                <li>Communication records: Retained for 3 years</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">COMPLIANCE REQUIREMENTS</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Regulatory Compliance</h3>
-                <p className="leading-relaxed mb-4">
-                  Goodpass operates in compliance with applicable financial services regulations, including but not limited to:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Personal Data Protection Act (PDPA) of Singapore</li>
-                  <li>Anti-Money Laundering (AML) requirements</li>
-                  <li>Know Your Customer (KYC) regulations</li>
-                  <li>Consumer protection laws</li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">ENFORCEMENT ACTIONS</h2>
-              <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Violation Consequences</h3>
-                <p className="leading-relaxed mb-4">
-                  Violations of these Additional Terms may result in:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Warning notices and educational resources</li>
-                  <li>Temporary suspension of reporting privileges</li>
-                  <li>Permanent account suspension</li>
-                  <li>Legal action for severe violations</li>
-                  <li>Referral to appropriate authorities when required</li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">UPDATES TO ADDITIONAL TERMS</h2>
-              <p className="leading-relaxed mb-4">
-                These Additional Terms of Use may be updated periodically to reflect changes in our services, legal requirements, or community needs. Users will be notified of significant changes through:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Email notifications to registered users</li>
-                <li>In-app notifications</li>
-                <li>Updates posted on our website</li>
-                <li>Community announcements</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Contact Information</h2>
-              <p className="leading-relaxed mb-4">
-                For questions about these Additional Terms of Use or to report violations, please contact us at:
-              </p>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="font-medium">GoodPass Support Team</p>
-                <p>Email: support@goodpass.id</p>
-                <p>160 Robinson Road, #14-04</p>
-                <p>Singapore Business Federation Center</p>
-                <p>Singapore (068914)</p>
-              </div>
-            </section>
-
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <p className="text-sm text-gray-500">
-                Last updated: January 2025
-              </p>
+            <div className="text-sm text-gray-500 mb-6">
+              Last Modified 26 October 2021
             </div>
+
+            <section>
+              <p className="leading-relaxed mb-6">
+                Credit report Inquiry is provided by Goodpass Pte. Ltd ("Goodpass") as part of a community-based character building report for any individual or companies who do not have a credit track record on any financial institutions. Goodpass provided this service on an as-is basis. Goodpass Pte. Ltd ("Goodpass") will try to verify the validity of the report to the best of its ability, however, the accuracy and the quality of the report lies on the details given by the community reporter.
+              </p>
+              
+              <p className="leading-relaxed mb-6">
+                As an Individual or Company who requested the Credit Inquiry, you understand that the information given on the Credit Report may contain very sensitive and confidential information, hence you are solely responsible to keep the information strictly confidential to you, and for the use of credit report character assessment only.
+              </p>
+              
+              <p className="leading-relaxed mb-4">
+                After inquiring about the information, you may not:
+              </p>
+              
+              <ul className="list-disc pl-6 space-y-3 mb-6">
+                <li className="leading-relaxed">
+                  Make a copy, make a screenshot, take a picture, alter, modify, or any other duplication activities, other than the information that Goodpass Pte. Ltd ("Goodpass") has provided to you.
+                </li>
+                <li className="leading-relaxed">
+                  You may not share, make it public, or tell information about the individuals/companies to other parties, other than for yourself.
+                </li>
+              </ul>
+              
+              <p className="leading-relaxed mb-6">
+                Failure to comply with the rules. 2, could risk yourself being subject to criminal prosecution under the UU ITE, or Confidential Information Act.
+              </p>
+              
+              <p className="leading-relaxed mb-6">
+                Goodpass Pte. Ltd ("Goodpass") will not be responsible for any misuse of information provided to you by the use of this Credit Report Inquiry feature.
+              </p>
+              
+              <p className="leading-relaxed mb-6">
+                You have read, understood and agreed to comply with{" "}
+                <Link 
+                  to="/about-us/terms-of-use" 
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
+                  https://goodpass.id/about-us/terms-of-use/
+                </Link>{" "}
+                in this Credit Report Request feature.
+              </p>
+            </section>
           </div>
         </div>
       </div>
