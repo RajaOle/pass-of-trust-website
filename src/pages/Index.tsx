@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
@@ -185,7 +186,7 @@ const Index = () => {
             </div>
             <div className="text-center order-1 lg:order-2">
               <div className="relative inline-block">
-                <img src="/lovable-uploads/Goodpass icon 3xxx.png" alt="Goodpass Security" className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity" />
+                <img src="/lovable-uploads/d3c26163-183d-4cb7-9d8d-4fcb206ef3c7.png" alt="Professional Business Meeting" className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
               </div>
             </div>
           </div>
