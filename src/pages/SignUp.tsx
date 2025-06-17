@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
-import { Eye, EyeOff, Mail, Phone } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff, Mail, Phone, ArrowLeft } from "lucide-react";
 import { countries, Country } from "@/data/countries";
 
 interface FormData {
@@ -50,6 +49,7 @@ const SignUp = () => {
   const [passwordValidationErrors, setPasswordValidationErrors] = useState<PasswordValidationErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -240,6 +240,10 @@ const SignUp = () => {
       title: "LinkedIn Sign Up",
       description: "LinkedIn OAuth integration would be implemented here.",
     });
+  };
+
+  const handleGoBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -476,6 +480,16 @@ const SignUp = () => {
                 disabled={isLoading}
               >
                 {isLoading ? "Creating account..." : "Create account"}
+              </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={handleGoBack}
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back
               </Button>
             </form>
 
