@@ -105,9 +105,7 @@ const MakeReport = () => {
                 <div className="space-y-4">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2 text-center">Enhance Financial Inclusion</h3>
-                    <p className="text-gray-600 text-sm">
-                      By contributing verified commitment reports to Goodpass, institutions help build community-based credit scores, enabling unbanked individuals to access formal financing opportunities.
-                    </p>
+                    <p className="text-gray-600 text-sm">By contributing verified commitment reports to Goodpass, institutions help build community-based credit scores, enabling business to get access for funding not only to formal institution but additional lines of credit from suppliers</p>
                   </div>
                   
                   <div>
