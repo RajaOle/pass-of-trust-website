@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -400,30 +399,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-};
-
-const handleGoogleSignUp = () => {
-  // In a real implementation, this would integrate with Google OAuth
-  toast({
-    title: "Google Sign Up",
-    description: "Google OAuth integration would be implemented here.",
-  });
-};
-
-const handleFacebookSignUp = () => {
-  // In a real implementation, this would integrate with Facebook OAuth
-  toast({
-    title: "Facebook Sign Up",
-    description: "Facebook OAuth integration would be implemented here.",
-  });
-};
-
-const handleLinkedInSignUp = () => {
-  // In a real implementation, this would integrate with LinkedIn OAuth
-  toast({
-    title: "LinkedIn Sign Up",
-    description: "LinkedIn OAuth integration would be implemented here.",
-  });
 };
 
 export default SignUp;
