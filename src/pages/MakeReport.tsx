@@ -1,7 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Building2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
+
 const MakeReport = () => {
   return <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -41,8 +43,7 @@ const MakeReport = () => {
           {/* Section 1: Individuals */}
           <Card className="shadow-lg">
             <CardHeader>
-              <CardTitle className="flex items-center text-blue-600 text-3xl text-center">
-                <User className="w-6 h-6 mr-2" />
+              <CardTitle className="text-blue-600 text-3xl text-center">
                 Why Individuals Should Contribute to Goodpass Reports
               </CardTitle>
             </CardHeader>
@@ -138,4 +139,5 @@ const MakeReport = () => {
       </main>
     </div>;
 };
+
 export default MakeReport;
