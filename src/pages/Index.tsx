@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
@@ -225,9 +224,9 @@ const Index = () => {
               <Link to="/about-us/terms-of-use" className="hover:text-blue-600 transition-colors text-center">
                 Terms of Use
               </Link>
-              <a href="https://goodpass.id/about-us/terms-of-use/additional-terms-of-use/" className="hover:text-blue-600 transition-colors text-center">
+              <Link to="/about-us/terms-of-use/additional-terms-of-use" className="hover:text-blue-600 transition-colors text-center">
                 Additional Terms of Use
-              </a>
+              </Link>
               <a href="https://goodpass.id/about-us/privacy-policy/" className="hover:text-blue-600 transition-colors text-center">
                 Privacy Policy
               </a>
