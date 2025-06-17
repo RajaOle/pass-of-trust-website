@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Users, FileText, Search, TrendingUp, Lock } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -221,9 +222,9 @@ const Index = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 lg:space-x-8 text-sm text-gray-600">
-              <a href="https://goodpass.id/about-us/terms-of-use/" className="hover:text-blue-600 transition-colors text-center">
+              <Link to="/about-us/terms-of-use" className="hover:text-blue-600 transition-colors text-center">
                 Terms of Use
-              </a>
+              </Link>
               <a href="https://goodpass.id/about-us/terms-of-use/additional-terms-of-use/" className="hover:text-blue-600 transition-colors text-center">
                 Additional Terms of Use
               </a>
