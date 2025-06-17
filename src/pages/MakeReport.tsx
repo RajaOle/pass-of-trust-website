@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2 } from "lucide-react";
@@ -98,7 +99,7 @@ const MakeReport = () => {
                 <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" alt="Group of people around display screens in professional setting" className="w-full h-full object-cover" />
               </div>
               
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-12">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2 text-center">Enhance Financial Inclusion</h3>
                   <p className="text-gray-600 text-sm">
