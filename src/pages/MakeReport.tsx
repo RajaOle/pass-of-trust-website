@@ -1,36 +1,10 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { FileText, User, DollarSign, Calendar, Send } from "lucide-react";
-import { useState } from "react";
+import { User, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const MakeReport = () => {
-  const [formData, setFormData] = useState({
-    borrowerName: "",
-    lenderName: "",
-    loanAmount: "",
-    loanDate: "",
-    repaymentStatus: "",
-    additionalNotes: ""
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Report submitted:", formData);
-    // Handle form submission logic here
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -56,137 +30,113 @@ const MakeReport = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Make a Report
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Report loan commitments and repayment history to help build financial reputation in your trusted community.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Join Goodpass to build trust and transparency in your financial community. Whether you're an individual or an institution, contributing to our platform helps create a more inclusive financial ecosystem.
           </p>
         </div>
 
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center text-xl">
-              <FileText className="w-6 h-6 mr-2 text-blue-600" />
-              Loan Report Form
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="borrowerName" className="flex items-center">
-                    <User className="w-4 h-4 mr-2" />
-                    Borrower Name
-                  </Label>
-                  <Input
-                    id="borrowerName"
-                    name="borrowerName"
-                    type="text"
-                    placeholder="Enter borrower's full name"
-                    value={formData.borrowerName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="lenderName" className="flex items-center">
-                    <User className="w-4 h-4 mr-2" />
-                    Lender Name
-                  </Label>
-                  <Input
-                    id="lenderName"
-                    name="lenderName"
-                    type="text"
-                    placeholder="Enter lender's full name"
-                    value={formData.lenderName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="loanAmount" className="flex items-center">
-                    <DollarSign className="w-4 h-4 mr-2" />
-                    Loan Amount
-                  </Label>
-                  <Input
-                    id="loanAmount"
-                    name="loanAmount"
-                    type="number"
-                    placeholder="Enter loan amount"
-                    value={formData.loanAmount}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="loanDate" className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Loan Date
-                  </Label>
-                  <Input
-                    id="loanDate"
-                    name="loanDate"
-                    type="date"
-                    value={formData.loanDate}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="repaymentStatus">Repayment Status</Label>
-                <select
-                  id="repaymentStatus"
-                  name="repaymentStatus"
-                  value={formData.repaymentStatus}
-                  onChange={(e) => handleInputChange(e as any)}
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  required
-                >
-                  <option value="">Select repayment status</option>
-                  <option value="fully-paid">Fully Paid</option>
-                  <option value="partially-paid">Partially Paid</option>
-                  <option value="overdue">Overdue</option>
-                  <option value="in-progress">In Progress</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="additionalNotes">Additional Notes</Label>
-                <textarea
-                  id="additionalNotes"
-                  name="additionalNotes"
-                  placeholder="Add any additional information about this loan..."
-                  value={formData.additionalNotes}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Section 1: Individuals */}
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl text-blue-600">
+                <User className="w-6 h-6 mr-2" />
+                Why Individuals Should Contribute to Goodpass Reports
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" 
+                  alt="Woman using laptop for financial planning"
+                  className="w-full h-full object-cover"
                 />
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white flex items-center">
-                  <Send className="w-4 h-4 mr-2" />
-                  Submit Report
-                </Button>
-                <Button type="button" variant="outline" className="border-gray-300">
-                  Save as Draft
-                </Button>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Build Your Credit Profile</h3>
+                  <p className="text-gray-600 text-sm">
+                    By contributing to or creating reports on Goodpass, individuals can establish a trusted GP Score, improving their chances of securing loans from banks or investors, even without a formal credit history.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Strengthen Community Trust</h3>
+                  <p className="text-gray-600 text-sm">
+                    Reporting accurate loan or behavioral data on Goodpass fosters transparency, helping individuals build a reputation for reliability and trustworthiness within their community.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Simplify Personal Lending</h3>
+                  <p className="text-gray-600 text-sm">
+                    Goodpass automates tracking and reminders for informal loans, reducing awkwardness and ensuring smoother financial interactions with peers, while contributing to a shared credit ecosystem.
+                  </p>
+                </div>
               </div>
-            </form>
-          </CardContent>
-        </Card>
 
-        <div className="mt-8 text-center">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                Start Individual Report
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Section 2: Institutions */}
+          <Card className="shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-xl text-green-600">
+                <Building2 className="w-6 h-6 mr-2" />
+                Why Institutions Should Contribute to Goodpass Commitment Reports
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80" 
+                  alt="Group of people around display screens in professional setting"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Enhance Financial Inclusion</h3>
+                  <p className="text-gray-600 text-sm">
+                    By contributing verified commitment reports to Goodpass, institutions help build community-based credit scores, enabling unbanked individuals to access formal financing opportunities.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Reduce Lending Risks</h3>
+                  <p className="text-gray-600 text-sm">
+                    Providing accurate data to Goodpass's platform allows institutions to leverage comprehensive credit behavior insights, minimizing default risks and improving loan decision-making.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Strengthen Community Trust</h3>
+                  <p className="text-gray-600 text-sm">
+                    Participating as a reporter in Goodpass fosters transparency and accountability, reinforcing trust within communities and supporting ethical lending practices.
+                  </p>
+                </div>
+              </div>
+
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                Start Institution Report
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mt-12 text-center">
           <p className="text-sm text-gray-600">
-            By submitting this report, you agree to our{" "}
+            By submitting reports, you agree to our{" "}
             <Link to="/about-us/terms-of-use" className="text-blue-600 hover:underline">
               Terms of Use
             </Link>{" "}
