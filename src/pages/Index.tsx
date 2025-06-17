@@ -36,8 +36,8 @@ const Index = () => {
 
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
-              <Button variant="ghost" className="text-gray-700 hover:text-blue-600 text-sm xl:text-base">
-                Login
+              <Button variant="ghost" asChild className="text-gray-700 hover:text-blue-600 text-sm xl:text-base">
+                <Link to="/signin">Login</Link>
               </Button>
               <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white text-sm xl:text-base">
                 <Link to="/signup">Sign Up</Link>
@@ -68,8 +68,8 @@ const Index = () => {
                   Pricing
                 </Link>
                 <div className="flex flex-col space-y-2 pt-3 border-t border-gray-100">
-                  <Button variant="ghost" className="text-gray-700 justify-start px-2">
-                    Login
+                  <Button variant="ghost" asChild className="text-gray-700 justify-start px-2">
+                    <Link to="/signin">Login</Link>
                   </Button>
                   <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white justify-start px-2">
                     <Link to="/signup">Sign Up</Link>
