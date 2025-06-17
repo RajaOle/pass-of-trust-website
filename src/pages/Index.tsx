@@ -39,8 +39,8 @@ const Index = () => {
               <Button variant="ghost" className="text-gray-700 hover:text-blue-600 text-sm xl:text-base">
                 Login
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm xl:text-base">
-                Sign Up
+              <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white text-sm xl:text-base">
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
 
@@ -71,8 +71,8 @@ const Index = () => {
                   <Button variant="ghost" className="text-gray-700 justify-start px-2">
                     Login
                   </Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white justify-start px-2">
-                    Sign Up
+                  <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white justify-start px-2">
+                    <Link to="/signup">Sign Up</Link>
                   </Button>
                 </div>
               </div>
@@ -93,8 +93,8 @@ const Index = () => {
               helping you build a verifiable financial reputation for better access to credit.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 w-full sm:w-auto">
-                Get Started Free
+              <Button size="lg" asChild className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 w-full sm:w-auto">
+                <Link to="/signup">Get Started Free</Link>
               </Button>
               <Button size="lg" variant="outline" className="border-gray-300 text-gray-700 px-6 sm:px-8 py-3 w-full sm:w-auto">
                 Learn More
@@ -205,8 +205,8 @@ const Index = () => {
           <p className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
             Join thousands of users who are already building trust through our community-based platform.
           </p>
-          <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-6 sm:px-8 py-3 w-full sm:w-auto max-w-sm">
-            Get Started Today
+          <Button size="lg" asChild className="bg-white text-blue-600 hover:bg-gray-100 px-6 sm:px-8 py-3 w-full sm:w-auto max-w-sm">
+            <Link to="/signup">Get Started Today</Link>
           </Button>
         </div>
       </section>
