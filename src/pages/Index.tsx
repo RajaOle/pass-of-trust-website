@@ -221,17 +221,98 @@ const Index = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 lg:space-x-8 text-sm text-gray-600">
-              <a href="#terms" className="hover:text-blue-600 transition-colors text-center">
+              <a href="https://goodpass.id/about-us/terms-of-use/" className="hover:text-blue-600 transition-colors text-center">
                 Terms of Use
               </a>
-              <a href="#additional-terms" className="hover:text-blue-600 transition-colors text-center">
+              <a href="https://goodpass.id/about-us/terms-of-use/additional-terms-of-use/" className="hover:text-blue-600 transition-colors text-center">
                 Additional Terms of Use
               </a>
-              <a href="#privacy" className="hover:text-blue-600 transition-colors text-center">
+              <a href="https://goodpass.id/about-us/privacy-policy/" className="hover:text-blue-600 transition-colors text-center">
                 Privacy Policy
               </a>
             </div>
           </div>
+          
+          {/* Terms of Use Content */}
+          <div className="mt-8 pt-8 border-t border-gray-200 prose prose-sm max-w-none text-gray-600">
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Terms of Use</h3>
+              <p className="text-xs text-gray-500 mb-4">Last Update: 27 Feb 2025</p>
+              
+              <div className="space-y-4 text-xs leading-relaxed">
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">WHO WE ARE & WHAT WE DO</h4>
+                  <p>Welcome to the Goodpass, Terms and Agreement!</p>
+                  <p>Goodpass. Pte. Ltd. ("Goodpass") is a community based credit reporting tool, that helps our communities build Credit Score outside of the formal Financial Institution, by producing reports (loan or other reports), by the communities, and for the communities.</p>
+                  <p>We help Reporters (the person making the report) remind their peers about outstanding loans or other conducts, and also help the Reportees (the person being reported) build credit score and credit worthiness track record, outside of formal Financial Institution.</p>
+                  <p>We DO NOT provide access to direct funding, loans, investments or any financial instruments directly to the Reporting Party or the Reported Party. Financial transactions, agreements, commitments, and reports are made between the community, and our role here is only to record and verify and check the validity of these reports so as to generate behavioral credit scores from the Reported Parties.</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">DEFINITIONS</h4>
+                  <p>("Agreement") or ("Community TOU") means these Goodpass, Terms of Use and all materials referred or linked to in here.</p>
+                  <p>("Community") means other members of the Goodpass, including yourself.</p>
+                  <p>("We, Us, Our, Goodpass, Goodpass App, Goodpass Score or Goodpass") means Goodpass App which is owned by PT Digital Venture International, a company registered in and under the law of Indonesia.</p>
+                  <p>("Reporter") is the person or entity, submitting a report about loan commitment, fraud or other reports.</p>
+                  <p>("Reportee") is the person or entity being reported by You or by the Community.</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">No Licenses</h4>
+                  <p>We grant to you only the rights and licenses expressly stated in this Agreement, and you receive no other rights or licenses with respect to us, the Goodpass products and services, our trademarks, or any other property or right of ours.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Privacy Policy Content */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Privacy Policy</h3>
+              <p className="text-xs text-gray-500 mb-4">Last modified: 27 February 2025</p>
+              
+              <div className="space-y-4 text-xs leading-relaxed">
+                <p>We at Goodpass are committed to protecting your privacy. This Privacy Policy applies to information and data collected by members and Goodpass as controllers, including information collected on our Website (www.Goodpass.id) or via other channels as described below.</p>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Controller</h4>
+                  <p>PT. GOODPASS PTE. LTD. is a limited liability company established in Indonesia with a Singaporean registration number 202306880R as ("Goodpass", "Goodpass & App", "Goodpass Community"). Community-based credit report services and controllers of your personal data are responsible for, based on, the use and any disclosures that can be made regarding your personal data.</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">What Information We Collect</h4>
+                  <p>"Personal Information" refers to any information that identifies you personally, including contact information, such as your name, National identification number, Passport, email address, company name, company address, telephone number and other information about yourself or your business.</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Data Protection Officer</h4>
+                  <p>If you have any questions about this Privacy Policy or our privacy practices please contact us info@goodpass.id or by mail at: 160 Robinson Road, #14-04 Singapore Business Federation Center Singapore (068914)</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Additional Terms of Use */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Terms of Use</h3>
+              <p className="text-xs text-gray-500 mb-4">Last Modified: 26 October 2021</p>
+              
+              <div className="space-y-4 text-xs leading-relaxed">
+                <p>Credit report Inquiry is provided by Goodpass Pte. Ltd ("Goodpass") as part of a community-based character building report for any individual or companies who do not have a credit track record on any financial institutions.</p>
+                
+                <p>As an Individual or Company who requested the Credit Inquiry, you understand that the information given on the Credit Report may contain very sensitive and confidential information, hence you are solely responsible to keep the information strictly confidential to you, and for the use of credit report character assessment only.</p>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">After inquiring about the information, you may not:</h4>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Make a copy, make a screenshot, take a picture, alter, modify, or any other duplication activities, other than the information that Goodpass Pte. Ltd ("Goodpass") has provided to you.</li>
+                    <li>You may not share, make it public, or tell information about the individuals/companies to other parties, other than for yourself.</li>
+                  </ul>
+                </div>
+                
+                <p>Failure to comply with the rules could risk yourself being subject to criminal prosecution under the UU ITE, or Confidential Information Act.</p>
+                <p>Goodpass Pte. Ltd ("Goodpass") will not be responsible for any misuse of information provided to you by the use of this Credit Report Inquiry feature.</p>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200 text-center text-gray-500 text-xs sm:text-sm space-y-2">
             <p>Copyright © 2025 GoodPass</p>
             <p>Powered by GoodPass</p>
