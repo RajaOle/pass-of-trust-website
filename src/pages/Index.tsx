@@ -23,9 +23,9 @@ const Index = () => {
               <Link to="/makereport" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Make a Report
               </Link>
-              <a href="#inquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
+              <Link to="/makeinquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Make Inquiries
-              </a>
+              </Link>
               <a href="#developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Developers
               </a>
@@ -58,9 +58,9 @@ const Index = () => {
                 <Link to="/makereport" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make a Report
                 </Link>
-                <a href="#inquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
+                <Link to="/makeinquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make Inquiries
-                </a>
+                </Link>
                 <a href="#developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Developers
                 </a>
