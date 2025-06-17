@@ -26,9 +26,9 @@ const Index = () => {
               <Link to="/makeinquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Make Inquiries
               </Link>
-              <a href="#developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
+              <Link to="/developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Developers
-              </a>
+              </Link>
               <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm xl:text-base">
                 Pricing
               </a>
@@ -61,9 +61,9 @@ const Index = () => {
                 <Link to="/makeinquiries" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Make Inquiries
                 </Link>
-                <a href="#developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
+                <Link to="/developers" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Developers
-                </a>
+                </Link>
                 <a href="#pricing" className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 px-2 rounded-md hover:bg-gray-50">
                   Pricing
                 </a>
