@@ -51,10 +51,25 @@ Every community user of ours agrees to abide by these Community TOU and is respo
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. DEFINITIONS
             </h2>
-              <p className="leading-relaxed mb-4">
-                Permission is granted to temporarily download one copy of the materials on Goodpass's website for 
-                personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
-              </p>
+              <p className="leading-relaxed mb-4">(“Agreement”) or (“Community TOU”) means these Goodpass, Terms of Use and all materials referred or linked to in here.
+
+(“Community”) means other members of the Goodpass, including yourself.
+
+(“Community Content”) means all content, including without limitation, language, data, information, and images, provided through or disclosed by the use of the Goodpass, whether by us, our customers or other members by the communities. Community Content, does not include Your Content.
+
+(“Sensitive Information”) means debit or credit card number, personal financial information, national identity or passports documents, driver license, bank account numbers, financial or health information, fraud report, loan report, including any information subject to regulations, laws, or industry standards designed to protect data privacy and security.
+
+(“Third Party Sites”) Means any third party services or websites linked from within or accessed through Goodpass App
+
+(“You”) means the person or entity using Goodpass 
+
+(“Your Content”) means all content, including without limitation, language, data, information, and images, provided through or disclosed by the use of the Goodpass, provided by You.
+
+(“We, Us, Our, Goodpass, Goodpass App, Goodpass Score or Goodpass”) means Goodpass App which is owned by PT Digital Venture International, a company registered in and under the law of Indonesia.
+
+(“Reporter”) is the person or entity, submitting a report about loan commitment, fraud or other reports, whether the file is provided by Your Content, or a Community Content.
+
+(“Reportee”) is the person or entity being reported by Your or by the Community.</p>
               <ul className="list-disc pl-6 space-y-2 mb-4">
                 <li>modify or copy the materials;</li>
                 <li>use the materials for any commercial purpose or for any public display (commercial or non-commercial);</li>
