@@ -95,21 +95,21 @@ const MakeReport = () => {
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Enhance Financial Inclusion</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Enhance Financial Inclusion</h3>
                   <p className="text-gray-600 text-sm">
                     By contributing verified commitment reports to Goodpass, institutions help build community-based credit scores, enabling unbanked individuals to access formal financing opportunities.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Reduce Lending Risks</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Reduce Lending Risks</h3>
                   <p className="text-gray-600 text-sm">
                     Providing accurate data to Goodpass's platform allows institutions to leverage comprehensive credit behavior insights, minimizing default risks and improving loan decision-making.
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Strengthen Community Trust</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-center">Strengthen Community Trust</h3>
                   <p className="text-gray-600 text-sm">
                     Participating as a reporter in Goodpass fosters transparency and accountability, reinforcing trust within communities and supporting ethical lending practices.
                   </p>
