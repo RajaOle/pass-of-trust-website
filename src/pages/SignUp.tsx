@@ -195,18 +195,11 @@ const SignUp = () => {
       
       toast({
         title: "Account created successfully!",
-        description: "Welcome to Goodpass. Please check your email to verify your account.",
+        description: "Welcome to Goodpass. Redirecting to get started...",
       });
       
-      // Reset form
-      setFormData({
-        email: "",
-        phoneNumber: "",
-        password: "",
-        confirmPassword: "",
-        selectedCountry: countries[0],
-      });
-      setPasswordValidationErrors({});
+      // Navigate to onboarding page instead of just resetting form
+      navigate("/onboarding");
     } catch (error) {
       toast({
         title: "Error",
