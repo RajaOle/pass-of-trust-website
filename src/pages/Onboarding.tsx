@@ -1,20 +1,15 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Users, TrendingUp } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-
 const Onboarding = () => {
   const navigate = useNavigate();
-
   const handleGoToDashboard = () => {
     // Navigate to dashboard (you can replace this with actual dashboard route)
     navigate("/dashboard");
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  return <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <Link to="/">
@@ -44,9 +39,7 @@ const Onboarding = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Write reports into Goodpass to make the community a better place
               </h3>
-              <p className="text-gray-600 mb-6">
-                Start contributing to a more transparent and trustworthy financial ecosystem. Your reports help build community trust and support better lending decisions.
-              </p>
+              <p className="text-gray-600 mb-6">Start contributing to a more transparent and trustworthy ecosystem. </p>
             </div>
 
             <div className="space-y-4">
@@ -67,26 +60,18 @@ const Onboarding = () => {
               </div>
             </div>
 
-            <Button
-              onClick={handleGoToDashboard}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-            >
+            <Button onClick={handleGoToDashboard} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
               Go to Dashboard
             </Button>
 
             <div className="text-center">
-              <Link 
-                to="/makereport" 
-                className="text-blue-600 hover:text-blue-500 text-sm font-medium"
-              >
+              <Link to="/makereport" className="text-blue-600 hover:text-blue-500 text-sm font-medium">
                 Start writing your first report →
               </Link>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Onboarding;
