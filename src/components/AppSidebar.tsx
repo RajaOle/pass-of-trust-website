@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -35,7 +34,7 @@ const menuItems = [
     icon: LayoutDashboard,
   },
   {
-    title: "Inquiry Records",
+    title: "Search Records",
     key: "inquiry-records",
     icon: FileText,
   },
