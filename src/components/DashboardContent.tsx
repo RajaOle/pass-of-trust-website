@@ -1,14 +1,27 @@
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, FileText, CreditCard, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, FileText, CreditCard, Users, LogIn } from "lucide-react";
 
 export const DashboardContent = () => {
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    navigate("/signin");
+  };
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-2">Welcome back! Here's your overview.</p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-gray-600 mt-2">Welcome back! Here's your overview.</p>
+        </div>
+        <Button onClick={handleSignIn} className="bg-blue-600 hover:bg-blue-700">
+          <LogIn className="h-4 w-4 mr-2" />
+          Sign In
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
