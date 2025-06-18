@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,7 @@ const SignIn = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,6 +37,9 @@ const SignIn = () => {
         title: "Sign In Successful",
         description: `Welcome back! Signed in with ${formData.emailOrPhone}`,
       });
+      
+      // Navigate to dashboard after successful sign in
+      navigate("/dashboard");
     }, 1500);
   };
 
