@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { DashboardContent } from "@/components/DashboardContent";
+import { MyReport } from "@/components/MyReport";
 import { InquiryRecords } from "@/components/InquiryRecords";
 import { PurchaseCredit } from "@/components/PurchaseCredit";
 import { Settings } from "@/components/Settings";
@@ -16,6 +17,8 @@ const Dashboard = () => {
     switch (activeSection) {
       case "dashboard":
         return <DashboardContent />;
+      case "my-report":
+        return <MyReport />;
       case "inquiry-records":
         return <InquiryRecords />;
       case "purchase-credit":

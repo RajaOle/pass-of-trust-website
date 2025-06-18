@@ -20,6 +20,7 @@ import {
   User,
   HelpCircle,
   LogOut,
+  BookOpen,
 } from "lucide-react";
 
 interface AppSidebarProps {
@@ -32,6 +33,11 @@ const menuItems = [
     title: "Dashboard",
     key: "dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "My Report",
+    key: "my-report",
+    icon: BookOpen,
   },
   {
     title: "Search Records",
