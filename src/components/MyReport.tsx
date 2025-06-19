@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { LoanReportHeader } from "@/components/LoanReportHeader";
 import { LoanReportCard } from "@/components/LoanReportCard";
@@ -49,7 +48,7 @@ export const MyReport = () => {
       idNumber: data.idNumber,
       // Payment-related fields
       paymentHistory: [],
-      repaymentCount: data.repaymentCount,
+      repaymentCount: data.repaymentCount ? Number(data.repaymentCount) : undefined,
       currentInstallment: 0,
     };
 
