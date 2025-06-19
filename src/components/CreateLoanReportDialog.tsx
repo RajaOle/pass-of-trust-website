@@ -39,8 +39,15 @@ export const CreateLoanReportDialog = ({
     setShowBankAccount(false);
   };
 
-  const handleNext = async () => {
-    console.log("handleNext called, current tab:", activeTab);
+  const handleNext = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("=== handleNext called ===");
+    console.log("Event type:", e.type);
+    console.log("Event target:", e.target);
+    console.log("Current tab:", activeTab);
+    
+    // Prevent any event propagation
+    e.preventDefault();
+    e.stopPropagation();
     
     if (activeTab === "record") {
       console.log("Validating record tab");
@@ -57,11 +64,11 @@ export const CreateLoanReportDialog = ({
       console.log("Record validation result:", isValid);
       
       if (!isValid) {
-        console.log("Record validation failed");
+        console.log("Record validation failed - staying on record tab");
         return;
       }
       
-      console.log("Moving to reportee tab");
+      console.log("Record validation passed - moving to reportee tab");
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       console.log("Validating reportee tab");
@@ -89,27 +96,39 @@ export const CreateLoanReportDialog = ({
       console.log("Reportee validation result:", isValid);
       
       if (!isValid) {
-        console.log("Reportee validation failed");
+        console.log("Reportee validation failed - staying on reportee tab");
         return;
       }
       
-      console.log("Moving to documents tab");
+      console.log("Reportee validation passed - moving to documents tab");
       setActiveTab("documents");
     }
+    console.log("=== handleNext completed ===");
   };
 
-  const handlePrevious = () => {
-    console.log("handlePrevious called, current tab:", activeTab);
+  const handlePrevious = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("=== handlePrevious called ===");
+    console.log("Current tab:", activeTab);
+    
+    // Prevent any event propagation
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (activeTab === "documents") {
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       setActiveTab("record");
     }
+    console.log("=== handlePrevious completed ===");
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
+    console.log("=== handleFormSubmit called ===");
+    console.log("Event type:", e.type);
+    console.log("Event target:", e.target);
+    
     e.preventDefault();
-    console.log("handleFormSubmit called");
+    e.stopPropagation();
     
     // Validate all tabs before final submission
     const recordFields: (keyof CreateLoanReportFormData)[] = ["title", "loanAmount", "loanType"];
@@ -124,7 +143,7 @@ export const CreateLoanReportDialog = ({
       reporteeFields = ["companyName", "phoneNumber"];
     }
     
-    const documentFields: (keyof CreateLoanReportFormData)[] = ["supportingDocuments"];
+    const documentFields: (keyof CreateLoanReportFormData)[] = [];
     
     const allFields = [...recordFields, ...reporteeFields, ...documentFields];
     console.log("All fields to validate for final submission:", allFields);
@@ -155,6 +174,21 @@ export const CreateLoanReportDialog = ({
     console.log("All validation passed, submitting form");
     const formData = form.getValues();
     onSubmit(formData);
+    console.log("=== handleFormSubmit completed ===");
+  };
+
+  const handleCreateReport = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("=== handleCreateReport called ===");
+    
+    // Prevent any event propagation
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Manually trigger form submission
+    const formData = form.getValues();
+    console.log("Create Report button clicked, form data:", formData);
+    onSubmit(formData);
+    console.log("=== handleCreateReport completed ===");
   };
 
   return (
@@ -171,7 +205,7 @@ export const CreateLoanReportDialog = ({
         </DialogHeader>
         
         <Form {...form}>
-          <form onSubmit={handleFormSubmit} className="space-y-4">
+          <div className="space-y-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="record">Record Information</TabsTrigger>
@@ -222,7 +256,7 @@ export const CreateLoanReportDialog = ({
                 </Button>
                 
                 {activeTab === "documents" ? (
-                  <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
+                  <Button type="button" onClick={handleCreateReport} className="bg-blue-600 hover:bg-blue-700">
                     Create Report
                   </Button>
                 ) : (
@@ -232,7 +266,7 @@ export const CreateLoanReportDialog = ({
                 )}
               </div>
             </div>
-          </form>
+          </div>
         </Form>
       </DialogContent>
     </Dialog>
