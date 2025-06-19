@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
 import { LoanReport } from "@/types/loanReport";
 import { calculateOutstandingAmount, formatCurrency } from "@/utils/paymentCalculations";
+import { formatLoanAmount } from "@/utils/loanReportHelpers";
 import { PaymentProofUpload } from "@/components/PaymentProofUpload";
 
 interface SinglePaymentTabProps {
@@ -28,7 +29,7 @@ export const SinglePaymentTab = ({ form, report }: SinglePaymentTabProps) => {
       <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
         <div>
           <p className="text-sm font-medium text-gray-700">Initial Amount</p>
-          <p className="text-lg font-semibold text-green-600">{report.loanAmount}</p>
+          <p className="text-lg font-semibold text-green-600">{formatLoanAmount(report.loanAmount)}</p>
         </div>
         <div>
           <p className="text-sm font-medium text-gray-700">Outstanding Amount</p>
