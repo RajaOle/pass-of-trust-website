@@ -31,6 +31,7 @@ export interface CreateLoanReportFormData {
   
   // Supporting Documents
   supportingDocuments?: FileList;
+  supportingDocumentsDescription: string;
 }
 
 export const useCreateLoanReportForm = () => {
@@ -56,7 +57,8 @@ export const useCreateLoanReportForm = () => {
       tiktokProfile: "",
       linkedinProfile: "",
       bankName: "",
-      bankAccountNumber: ""
+      bankAccountNumber: "",
+      supportingDocumentsDescription: ""
     }
   });
 
