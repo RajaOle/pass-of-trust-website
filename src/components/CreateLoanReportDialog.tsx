@@ -28,14 +28,8 @@ export const CreateLoanReportDialog = ({
   const watchLoanType = form.watch("loanType");
   const watchReporteeType = form.watch("reporteeType");
 
-  const onSubmit = async (data: CreateLoanReportFormData) => {
-    // Validate supporting documents before submission
-    const isDocumentsValid = await form.trigger(["supportingDocuments"]);
-    if (!isDocumentsValid) {
-      setActiveTab("documents");
-      return;
-    }
-
+  const onSubmit = (data: CreateLoanReportFormData) => {
+    console.log("Final form submission with data:", data);
     onCreateReport(data);
     form.reset();
     setOpen(false);
@@ -46,7 +40,10 @@ export const CreateLoanReportDialog = ({
   };
 
   const handleNext = async () => {
+    console.log("handleNext called, current tab:", activeTab);
+    
     if (activeTab === "record") {
+      console.log("Validating record tab");
       // Validate required fields in Record Information tab
       const fieldsToValidate: (keyof CreateLoanReportFormData)[] = ["title", "loanAmount", "loanType"];
       
@@ -55,11 +52,19 @@ export const CreateLoanReportDialog = ({
         fieldsToValidate.push("repaymentCount");
       }
       
+      console.log("Record fields to validate:", fieldsToValidate);
       const isValid = await form.trigger(fieldsToValidate);
-      if (!isValid) return;
+      console.log("Record validation result:", isValid);
       
+      if (!isValid) {
+        console.log("Record validation failed");
+        return;
+      }
+      
+      console.log("Moving to reportee tab");
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
+      console.log("Validating reportee tab");
       // Validate required fields in Reportee Information tab
       let fieldsToValidate: (keyof CreateLoanReportFormData)[] = [];
       
@@ -79,14 +84,22 @@ export const CreateLoanReportDialog = ({
         }
       }
       
+      console.log("Reportee fields to validate:", fieldsToValidate);
       const isValid = await form.trigger(fieldsToValidate);
-      if (!isValid) return;
+      console.log("Reportee validation result:", isValid);
       
+      if (!isValid) {
+        console.log("Reportee validation failed");
+        return;
+      }
+      
+      console.log("Moving to documents tab");
       setActiveTab("documents");
     }
   };
 
   const handlePrevious = () => {
+    console.log("handlePrevious called, current tab:", activeTab);
     if (activeTab === "documents") {
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
@@ -94,8 +107,9 @@ export const CreateLoanReportDialog = ({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("handleFormSubmit called");
     
     // Validate all tabs before final submission
     const recordFields: (keyof CreateLoanReportFormData)[] = ["title", "loanAmount", "loanType"];
@@ -113,13 +127,19 @@ export const CreateLoanReportDialog = ({
     const documentFields: (keyof CreateLoanReportFormData)[] = ["supportingDocuments"];
     
     const allFields = [...recordFields, ...reporteeFields, ...documentFields];
+    console.log("All fields to validate for final submission:", allFields);
+    
     const isValid = await form.trigger(allFields);
+    console.log("Final validation result:", isValid);
     
     if (!isValid) {
+      console.log("Final validation failed, finding which tab has errors");
       // Find which tab has errors and navigate to it
       const recordValid = await form.trigger(recordFields);
       const reporteeValid = await form.trigger(reporteeFields);
       const documentsValid = await form.trigger(documentFields);
+      
+      console.log("Tab validation results:", { recordValid, reporteeValid, documentsValid });
       
       if (!recordValid) {
         setActiveTab("record");
@@ -132,6 +152,7 @@ export const CreateLoanReportDialog = ({
     }
     
     // If all validation passes, submit the form
+    console.log("All validation passed, submitting form");
     const formData = form.getValues();
     onSubmit(formData);
   };
@@ -150,7 +171,7 @@ export const CreateLoanReportDialog = ({
         </DialogHeader>
         
         <Form {...form}>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleFormSubmit} className="space-y-4">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="record">Record Information</TabsTrigger>

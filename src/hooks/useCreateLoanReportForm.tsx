@@ -1,3 +1,4 @@
+
 import { useForm } from "react-hook-form";
 import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
@@ -55,7 +56,8 @@ export const useCreateLoanReportForm = () => {
       tiktokProfile: "",
       linkedinProfile: "",
       bankName: "",
-      bankAccountNumber: ""
+      bankAccountNumber: "",
+      supportingDocuments: undefined
     }
   });
 
