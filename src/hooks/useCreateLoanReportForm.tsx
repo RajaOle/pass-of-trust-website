@@ -16,6 +16,8 @@ export interface CreateLoanReportFormData {
   reporteeType: "individual" | "company";
   borrowerName: string;
   companyName?: string;
+  website?: string;
+  registrationNumber?: string;
   idType: string;
   idNumber: string;
   idDocument?: FileList;
@@ -23,6 +25,7 @@ export interface CreateLoanReportFormData {
   email: string;
   address?: string;
   instagramProfile?: string;
+  tiktokProfile?: string;
   linkedinProfile?: string;
   
   // Supporting Documents
@@ -42,12 +45,15 @@ export const useCreateLoanReportForm = () => {
       reporteeType: "individual",
       borrowerName: "",
       companyName: "",
+      website: "",
+      registrationNumber: "",
       idType: "",
       idNumber: "",
       phoneNumber: "",
       email: "",
       address: "",
       instagramProfile: "",
+      tiktokProfile: "",
       linkedinProfile: ""
     }
   });
@@ -61,10 +67,26 @@ export const useCreateLoanReportForm = () => {
     }
   };
 
-  const validateEmail = (value: string) => {
-    if (!value) return "Email is required";
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value) || "Please enter a valid email address";
+  const validateEmail = (value: string, reporteeType: "individual" | "company") => {
+    // Email is required for individuals, optional for companies
+    if (reporteeType === "individual" && !value) {
+      return "Email is required";
+    }
+    if (value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(value) || "Please enter a valid email address";
+    }
+    return true;
+  };
+
+  const validateWebsite = (value: string) => {
+    if (!value) return true; // Optional field
+    try {
+      new URL(value.startsWith('http') ? value : `https://${value}`);
+      return true;
+    } catch {
+      return "Please enter a valid website URL";
+    }
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -82,6 +104,7 @@ export const useCreateLoanReportForm = () => {
     form,
     validatePhoneNumber,
     validateEmail,
+    validateWebsite,
     formatPhoneNumber
   };
 };

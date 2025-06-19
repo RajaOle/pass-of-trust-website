@@ -5,13 +5,14 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Instagram, Linkedin } from "lucide-react";
+import { Instagram, Linkedin, Globe } from "lucide-react";
 import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
 
 interface ReporteeInformationTabProps {
   form: UseFormReturn<CreateLoanReportFormData>;
   validatePhoneNumber: (value: string) => string | boolean;
-  validateEmail: (value: string) => string | boolean;
+  validateEmail: (value: string, reporteeType: "individual" | "company") => string | boolean;
+  validateWebsite: (value: string) => string | boolean;
   formatPhoneNumber: (value: string) => string;
   showSocialMedia: boolean;
   setShowSocialMedia: (show: boolean) => void;
@@ -20,7 +21,8 @@ interface ReporteeInformationTabProps {
 export const ReporteeInformationTab = ({ 
   form, 
   validatePhoneNumber, 
-  validateEmail, 
+  validateEmail,
+  validateWebsite,
   formatPhoneNumber,
   showSocialMedia,
   setShowSocialMedia 
@@ -93,20 +95,54 @@ export const ReporteeInformationTab = ({
           )}
         />
       ) : (
-        <FormField
-          control={form.control}
-          name="companyName"
-          rules={{ required: "Company name is required" }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Company Name *</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g., ABC Corporation" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <>
+          <FormField
+            control={form.control}
+            name="companyName"
+            rules={{ required: "Company name is required" }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company Name *</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., ABC Corporation" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="website"
+            rules={{ validate: validateWebsite }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center gap-2">
+                  <Globe className="h-4 w-4" />
+                  Website (Optional)
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., www.company.com or https://company.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="registrationNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Registration Number (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., Company registration or tax ID number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </>
       )}
 
       <FormField
@@ -137,12 +173,16 @@ export const ReporteeInformationTab = ({
       <FormField
         control={form.control}
         name="email"
-        rules={{ validate: validateEmail }}
+        rules={{ 
+          validate: (value) => validateEmail(value, watchReporteeType)
+        }}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email *</FormLabel>
+            <FormLabel>
+              Email {watchReporteeType === "individual" ? "*" : "(Optional)"}
+            </FormLabel>
             <FormControl>
-              <Input type="email" placeholder="e.g., john@example.com" {...field} />
+              <Input type="email" placeholder="e.g., contact@example.com" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -244,6 +284,23 @@ export const ReporteeInformationTab = ({
                   <FormLabel className="flex items-center gap-2">
                     <Instagram className="h-4 w-4" />
                     Instagram Profile
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., @username or full URL" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="tiktokProfile"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-2">
+                    <span className="h-4 w-4 text-center font-bold text-xs">TT</span>
+                    TikTok Profile
                   </FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., @username or full URL" {...field} />

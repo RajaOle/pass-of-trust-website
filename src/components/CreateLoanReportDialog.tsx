@@ -22,7 +22,7 @@ export const CreateLoanReportDialog = ({
   const [showCollateral, setShowCollateral] = React.useState(false);
   const [showSocialMedia, setShowSocialMedia] = React.useState(false);
   
-  const { form, validatePhoneNumber, validateEmail, formatPhoneNumber } = useCreateLoanReportForm();
+  const { form, validatePhoneNumber, validateEmail, validateWebsite, formatPhoneNumber } = useCreateLoanReportForm();
 
   const watchLoanType = form.watch("loanType");
   const watchReporteeType = form.watch("reporteeType");
@@ -56,8 +56,24 @@ export const CreateLoanReportDialog = ({
         const isValid = await form.trigger(["borrowerName", "phoneNumber", "email"]);
         if (!isValid) return;
       } else {
-        const isValid = await form.trigger(["companyName", "phoneNumber", "email"]);
+        // For companies, only companyName and phoneNumber are required
+        // Email is optional for companies
+        const isValid = await form.trigger(["companyName", "phoneNumber"]);
         if (!isValid) return;
+        
+        // Validate email only if it's provided
+        const emailValue = form.getValues("email");
+        if (emailValue) {
+          const emailValid = await form.trigger("email");
+          if (!emailValid) return;
+        }
+        
+        // Validate website only if it's provided
+        const websiteValue = form.getValues("website");
+        if (websiteValue) {
+          const websiteValid = await form.trigger("website");
+          if (!websiteValid) return;
+        }
       }
       
       setActiveTab("documents");
@@ -107,6 +123,7 @@ export const CreateLoanReportDialog = ({
                   form={form}
                   validatePhoneNumber={validatePhoneNumber}
                   validateEmail={validateEmail}
+                  validateWebsite={validateWebsite}
                   formatPhoneNumber={formatPhoneNumber}
                   showSocialMedia={showSocialMedia}
                   setShowSocialMedia={setShowSocialMedia}
