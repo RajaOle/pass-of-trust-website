@@ -6,6 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { Plus } from "lucide-react";
+
 interface CreateLoanReportFormData {
   title: string;
   borrowerName: string;
@@ -38,7 +39,7 @@ export const CreateLoanReportDialog = ({
       <DialogTrigger asChild>
         <Button className="bg-blue-600 hover:bg-blue-700">
           <Plus className="h-4 w-4 mr-2" />
-          Create New Loan Report
+          Create New Report
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
