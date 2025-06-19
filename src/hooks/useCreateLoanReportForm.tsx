@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
@@ -17,7 +16,6 @@ export interface CreateLoanReportFormData {
   borrowerName: string;
   companyName?: string;
   website?: string;
-  registrationNumber?: string;
   idType: string;
   idNumber: string;
   idDocument?: FileList;
@@ -46,7 +44,6 @@ export const useCreateLoanReportForm = () => {
       borrowerName: "",
       companyName: "",
       website: "",
-      registrationNumber: "",
       idType: "",
       idNumber: "",
       phoneNumber: "",

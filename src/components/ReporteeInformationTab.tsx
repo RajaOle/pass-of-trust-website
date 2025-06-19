@@ -1,4 +1,3 @@
-
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
@@ -123,20 +122,6 @@ export const ReporteeInformationTab = ({
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="e.g., www.company.com or https://company.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="registrationNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Registration Number (Optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., Company registration or tax ID number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
