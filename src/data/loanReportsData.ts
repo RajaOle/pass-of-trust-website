@@ -14,7 +14,13 @@ export const loanReports: LoanReport[] = [
     dueDate: "2024-02-15",
     kycVerified: true,
     reporteeKycStatus: "Verified",
-    recordStatus: "Verified"
+    recordStatus: "Verified",
+    phoneNumber: "+1234567890",
+    email: "john.smith@email.com",
+    address: "123 Main St, Anytown, USA",
+    reporteeType: "individual",
+    idType: "drivers-license",
+    idNumber: "D1234567"
   },
   {
     id: 2,
@@ -28,7 +34,11 @@ export const loanReports: LoanReport[] = [
     dueDate: null,
     kycVerified: false,
     reporteeKycStatus: "Pending",
-    recordStatus: "Partially Verified"
+    recordStatus: "Partially Verified",
+    reporteeType: "company",
+    companyName: "ABC Corp",
+    website: "https://abccorp.com",
+    // Missing phone, email, address - good candidate for "Add Info"
   },
   {
     id: 3,
@@ -42,7 +52,11 @@ export const loanReports: LoanReport[] = [
     dueDate: "2024-02-08",
     kycVerified: true,
     reporteeKycStatus: "Verified",
-    recordStatus: "Verified"
+    recordStatus: "Verified",
+    phoneNumber: "+1987654321",
+    email: "sarah.johnson@email.com",
+    reporteeType: "individual",
+    // Missing address and social media - good candidate for "Add Info"
   },
   {
     id: 4,
@@ -56,6 +70,10 @@ export const loanReports: LoanReport[] = [
     dueDate: "2024-12-05",
     kycVerified: true,
     reporteeKycStatus: "Verified",
-    recordStatus: "Partially Verified"
+    recordStatus: "Partially Verified",
+    reporteeType: "company",
+    companyName: "Tech Solutions LLC",
+    email: "contact@techsolutions.com",
+    // Missing phone, address, website - good candidate for "Add Info"
   },
 ];

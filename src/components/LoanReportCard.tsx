@@ -1,11 +1,14 @@
+
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, CreditCard, Hash, User, Activity, Edit } from "lucide-react";
+import { Calendar, CreditCard, Hash, User, Activity } from "lucide-react";
 import { LoanReport } from "@/types/loanReport";
 import { RestructureLoanDialog } from "@/components/RestructureLoanDialog";
+import { AddInfoDialog } from "@/components/AddInfoDialog";
 import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
+import { AddInfoFormData } from "@/hooks/useAddInfoForm";
 import {
   getLoanTypeBadgeVariant,
   getReporteeKycStatusBadge,
@@ -16,9 +19,10 @@ import {
 interface LoanReportCardProps {
   report: LoanReport;
   onRestructure?: (data: RestructureLoanFormData) => void;
+  onAddInfo?: (data: AddInfoFormData) => void;
 }
 
-export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) => {
+export const LoanReportCard = ({ report, onRestructure, onAddInfo }: LoanReportCardProps) => {
   const handleRestructure = (data: RestructureLoanFormData) => {
     console.log("Restructuring report:", report.id, "with data:", data);
     if (onRestructure) {
@@ -26,9 +30,11 @@ export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) =
     }
   };
 
-  const handleEditInfo = () => {
-    console.log("Edit info for report:", report.id);
-    // TODO: Implement edit info functionality
+  const handleAddInfo = (data: AddInfoFormData) => {
+    console.log("Adding info to report:", report.id, "with data:", data);
+    if (onAddInfo) {
+      onAddInfo(data);
+    }
   };
 
   return (
@@ -114,10 +120,10 @@ export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) =
               report={report} 
               onRestructure={handleRestructure}
             />
-            <Button variant="outline" size="sm" className="w-28" onClick={handleEditInfo}>
-              <Edit className="h-4 w-4 mr-1" />
-              Add Info
-            </Button>
+            <AddInfoDialog 
+              report={report} 
+              onAddInfo={handleAddInfo}
+            />
             <Button variant="default" size="sm" className="w-28 bg-blue-600 hover:bg-blue-700">
               <Activity className="h-4 w-4 mr-1" />
               Process
