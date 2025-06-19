@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -117,7 +116,7 @@ export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) =
             />
             <Button variant="outline" size="sm" className="w-28" onClick={handleEditInfo}>
               <Edit className="h-4 w-4 mr-1" />
-              Edit Info
+              Add Info
             </Button>
             <Button variant="default" size="sm" className="w-28 bg-blue-600 hover:bg-blue-700">
               <Activity className="h-4 w-4 mr-1" />
