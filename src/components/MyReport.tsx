@@ -41,7 +41,7 @@ export const MyReport = () => {
       borrowerName: "Sarah Johnson",
       loanAmount: "$28,500",
       date: "2024-01-08",
-      status: "Pending",
+      status: "Active",
       loanType: "Installment",
       dueDate: "2024-02-08",
       kycVerified: true,
