@@ -20,7 +20,27 @@ export const loanReports: LoanReport[] = [
     address: "123 Main St, Anytown, USA",
     reporteeType: "individual",
     idType: "drivers-license",
-    idNumber: "D1234567"
+    idNumber: "D1234567",
+    repaymentCount: 12,
+    currentInstallment: 2,
+    paymentHistory: [
+      {
+        id: "PAY-001",
+        amount: "29,166.67",
+        date: "2024-02-15",
+        timestamp: "2024-02-15T10:30:00Z",
+        type: "installment",
+        installmentNumber: 2
+      },
+      {
+        id: "PAY-002",
+        amount: "29,166.67",
+        date: "2024-01-15",
+        timestamp: "2024-01-15T09:15:00Z",
+        type: "installment",
+        installmentNumber: 1
+      }
+    ]
   },
   {
     id: 2,
@@ -38,7 +58,7 @@ export const loanReports: LoanReport[] = [
     reporteeType: "company",
     companyName: "ABC Corp",
     website: "https://abccorp.com",
-    // Missing phone, email, address - good candidate for "Add Info"
+    paymentHistory: []
   },
   {
     id: 3,
@@ -56,7 +76,18 @@ export const loanReports: LoanReport[] = [
     phoneNumber: "+1987654321",
     email: "sarah.johnson@email.com",
     reporteeType: "individual",
-    // Missing address and social media - good candidate for "Add Info"
+    repaymentCount: 6,
+    currentInstallment: 1,
+    paymentHistory: [
+      {
+        id: "PAY-003",
+        amount: "4,750.00",
+        date: "2024-01-08",
+        timestamp: "2024-01-08T14:20:00Z",
+        type: "installment",
+        installmentNumber: 1
+      }
+    ]
   },
   {
     id: 4,
@@ -74,6 +105,6 @@ export const loanReports: LoanReport[] = [
     reporteeType: "company",
     companyName: "Tech Solutions LLC",
     email: "contact@techsolutions.com",
-    // Missing phone, address, website - good candidate for "Add Info"
+    paymentHistory: []
   },
 ];

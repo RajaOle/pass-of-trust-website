@@ -26,4 +26,18 @@ export interface LoanReport {
   companyName?: string;
   idType?: string;
   idNumber?: string;
+  // Payment-related fields
+  outstandingAmount?: string;
+  paymentHistory?: PaymentRecord[];
+  repaymentCount?: number;
+  currentInstallment?: number;
+}
+
+export interface PaymentRecord {
+  id: string;
+  amount: string;
+  date: string;
+  timestamp: string;
+  type: "installment" | "partial" | "full";
+  installmentNumber?: number;
 }

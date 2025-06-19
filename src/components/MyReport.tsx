@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { LoanReportHeader } from "@/components/LoanReportHeader";
 import { LoanReportCard } from "@/components/LoanReportCard";
 import { loanReports as initialLoanReports } from "@/data/loanReportsData";
-import { LoanReport } from "@/types/loanReport";
+import { LoanReport, PaymentRecord } from "@/types/loanReport";
 import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
 import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
 import { AddInfoFormData } from "@/hooks/useAddInfoForm";
+import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
+import { generatePaymentId } from "@/utils/paymentCalculations";
 
 export const MyReport = () => {
   const [loanReports, setLoanReports] = useState<LoanReport[]>(initialLoanReports);
@@ -44,7 +46,11 @@ export const MyReport = () => {
       reporteeType: data.reporteeType,
       companyName: data.companyName,
       idType: data.idType,
-      idNumber: data.idNumber
+      idNumber: data.idNumber,
+      // Payment-related fields
+      paymentHistory: [],
+      repaymentCount: data.repaymentCount,
+      currentInstallment: 0,
     };
 
     setLoanReports([newReport, ...loanReports]);
@@ -95,6 +101,35 @@ export const MyReport = () => {
     console.log("Additional information added successfully");
   };
 
+  const handleProcessPayment = (data: ProcessPaymentFormData) => {
+    const now = new Date();
+    const paymentRecord: PaymentRecord = {
+      id: generatePaymentId(),
+      amount: data.paymentAmount,
+      date: now.toISOString().split('T')[0],
+      timestamp: now.toISOString(),
+      type: data.paymentType,
+      installmentNumber: data.installmentNumber,
+    };
+
+    setLoanReports(prevReports => 
+      prevReports.map(report => 
+        report.id === data.originalReportId
+          ? {
+              ...report,
+              paymentHistory: [paymentRecord, ...(report.paymentHistory || [])],
+              currentInstallment: data.paymentType === "installment" 
+                ? (report.currentInstallment || 0) + 1 
+                : report.currentInstallment,
+              status: data.paymentType === "full" ? "Paid" : "Active",
+            }
+          : report
+      )
+    );
+
+    console.log("Payment processed successfully");
+  };
+
   return (
     <div className="space-y-6">
       <LoanReportHeader onCreateReport={handleCreateReport} />
@@ -106,6 +141,7 @@ export const MyReport = () => {
             report={report} 
             onRestructure={handleRestructure}
             onAddInfo={handleAddInfo}
+            onProcessPayment={handleProcessPayment}
           />
         ))}
       </div>
