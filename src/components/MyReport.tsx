@@ -4,16 +4,17 @@ import { LoanReportHeader } from "@/components/LoanReportHeader";
 import { LoanReportCard } from "@/components/LoanReportCard";
 import { loanReports as initialLoanReports } from "@/data/loanReportsData";
 import { LoanReport } from "@/types/loanReport";
+import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
 
 export const MyReport = () => {
   const [loanReports, setLoanReports] = useState<LoanReport[]>(initialLoanReports);
 
-  const handleCreateReport = (data: any) => {
+  const handleCreateReport = (data: CreateLoanReportFormData) => {
     const newReport: LoanReport = {
       id: loanReports.length + 1,
       uniqueId: `LR-2024-${String(loanReports.length + 1).padStart(3, '0')}-${data.title.substring(0, 3).toUpperCase()}`,
       title: data.title,
-      borrowerName: data.reporteeType === "individual" ? data.borrowerName : data.companyName,
+      borrowerName: data.reporteeType === "individual" ? data.borrowerName : data.companyName || "",
       loanAmount: data.loanAmount,
       date: new Date().toISOString().split('T')[0],
       status: "Under Review",

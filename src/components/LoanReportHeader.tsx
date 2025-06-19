@@ -1,9 +1,10 @@
 
 import React from "react";
 import { CreateLoanReportDialog } from "@/components/CreateLoanReportDialog";
+import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
 
 interface LoanReportHeaderProps {
-  onCreateReport: (data: any) => void;
+  onCreateReport: (data: CreateLoanReportFormData) => void;
 }
 
 export const LoanReportHeader = ({ onCreateReport }: LoanReportHeaderProps) => {
