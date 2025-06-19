@@ -70,6 +70,18 @@ export const banks: Bank[] = [
   { name: "ICICI Bank", code: "ICICINBB", country: "IN" },
   { name: "Axis Bank", code: "AXISINBB", country: "IN" },
   
+  // Indonesia
+  { name: "Bank Mandiri", code: "BMRIIDJA", country: "ID" },
+  { name: "Bank Central Asia", code: "CENAIDJA", country: "ID" },
+  { name: "Bank Rakyat Indonesia", code: "BRINIDJA", country: "ID" },
+  { name: "Bank Negara Indonesia", code: "BNINIDJA", country: "ID" },
+  { name: "Bank CIMB Niaga", code: "BNIAIDJA", country: "ID" },
+  { name: "Bank Danamon", code: "BDMNIDJA", country: "ID" },
+  { name: "Bank Permata", code: "BBBAIDJA", country: "ID" },
+  { name: "Bank BTPN", code: "BTPNIDJA", country: "ID" },
+  { name: "Bank Maybank Indonesia", code: "MBBEIDJA", country: "ID" },
+  { name: "Bank OCBC NISP", code: "NISPIDJA", country: "ID" },
+  
   // Nigeria
   { name: "First Bank of Nigeria", code: "FBNINGLA", country: "NG" },
   { name: "Guaranty Trust Bank", code: "GTBINGLA", country: "NG" },
