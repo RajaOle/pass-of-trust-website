@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, CreditCard, Hash, User, Activity } from "lucide-react";
+import { Calendar, CreditCard, Hash, User, Activity, Edit } from "lucide-react";
 import { LoanReport } from "@/types/loanReport";
 import { RestructureLoanDialog } from "@/components/RestructureLoanDialog";
 import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
@@ -25,6 +25,11 @@ export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) =
     if (onRestructure) {
       onRestructure(data);
     }
+  };
+
+  const handleEditInfo = () => {
+    console.log("Edit info for report:", report.id);
+    // TODO: Implement edit info functionality
   };
 
   return (
@@ -110,6 +115,10 @@ export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) =
               report={report} 
               onRestructure={handleRestructure}
             />
+            <Button variant="outline" size="sm" className="w-28" onClick={handleEditInfo}>
+              <Edit className="h-4 w-4 mr-1" />
+              Edit Info
+            </Button>
             <Button variant="default" size="sm" className="w-28 bg-blue-600 hover:bg-blue-700">
               <Activity className="h-4 w-4 mr-1" />
               Process
