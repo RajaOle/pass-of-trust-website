@@ -5,6 +5,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
+import { isValidPhoneNumber } from 'libphonenumber-js';
 
 interface ContactInfoFieldsProps {
   form: UseFormReturn<CreateLoanReportFormData>;
@@ -41,7 +42,17 @@ export const ContactInfoFields = ({
       <FormField
         control={form.control}
         name="phoneNumber"
-        rules={{ validate: validatePhoneNumber }}
+        rules={{ 
+          required: "Phone number is required",
+          validate: (value) => {
+            if (!value) return "Phone number is required";
+            try {
+              return isValidPhoneNumber(value) || "Please enter a valid phone number with country code (e.g., +1234567890)";
+            } catch (error) {
+              return "Please enter a valid phone number with country code (e.g., +1234567890)";
+            }
+          }
+        }}
         render={({ field }) => (
           <FormItem>
             <FormLabel>Phone Number *</FormLabel>
@@ -67,7 +78,18 @@ export const ContactInfoFields = ({
         control={form.control}
         name="email"
         rules={{ 
-          validate: (value) => validateEmail(value, reporteeType)
+          validate: (value) => {
+            const currentReporteeType = form.getValues("reporteeType");
+            // Email is required for individuals, optional for companies
+            if (currentReporteeType === "individual" && !value) {
+              return "Email is required";
+            }
+            if (value) {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return emailRegex.test(value) || "Please enter a valid email address";
+            }
+            return true;
+          }
         }}
         render={({ field }) => (
           <FormItem>

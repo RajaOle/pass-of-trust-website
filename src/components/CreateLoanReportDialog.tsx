@@ -41,49 +41,39 @@ export const CreateLoanReportDialog = ({
   const handleNext = async () => {
     if (activeTab === "record") {
       // Validate required fields in Record Information tab
-      const isValid = await form.trigger(["title", "loanAmount", "loanType"]);
+      const fieldsToValidate = ["title", "loanAmount", "loanType"];
       
       // Also validate repaymentCount if loan type is Installment
       if (watchLoanType === "Installment") {
-        const repaymentValid = await form.trigger("repaymentCount");
-        if (!isValid || !repaymentValid) return;
-      } else if (!isValid) {
-        return;
+        fieldsToValidate.push("repaymentCount");
       }
+      
+      const isValid = await form.trigger(fieldsToValidate);
+      if (!isValid) return;
       
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       // Validate required fields in Reportee Information tab
+      let fieldsToValidate: string[] = [];
+      
       if (watchReporteeType === "individual") {
-        const isValid = await form.trigger(["borrowerName", "phoneNumber", "email"]);
-        if (!isValid) return;
+        fieldsToValidate = ["borrowerName", "phoneNumber", "email"];
       } else {
         // For companies, only companyName and phoneNumber are required
-        // Email is optional for companies
-        const isValid = await form.trigger(["companyName", "phoneNumber"]);
-        if (!isValid) return;
-        
-        // Validate email only if it's provided
-        const emailValue = form.getValues("email");
-        if (emailValue) {
-          const emailValid = await form.trigger("email");
-          if (!emailValid) return;
-        }
-        
-        // Validate website only if it's provided
-        const websiteValue = form.getValues("website");
-        if (websiteValue) {
-          const websiteValid = await form.trigger("website");
-          if (!websiteValid) return;
+        fieldsToValidate = ["companyName", "phoneNumber"];
+      }
+      
+      // Always validate these fields if they have values
+      const optionalFields = ["email", "website", "bankAccountNumber"];
+      for (const field of optionalFields) {
+        const value = form.getValues(field as keyof CreateLoanReportFormData);
+        if (value) {
+          fieldsToValidate.push(field);
         }
       }
-
-      // Validate bank account number if it's provided
-      const bankAccountValue = form.getValues("bankAccountNumber");
-      if (bankAccountValue) {
-        const bankAccountValid = await form.trigger("bankAccountNumber");
-        if (!bankAccountValid) return;
-      }
+      
+      const isValid = await form.trigger(fieldsToValidate);
+      if (!isValid) return;
       
       setActiveTab("documents");
     }

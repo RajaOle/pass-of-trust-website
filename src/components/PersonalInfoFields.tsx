@@ -52,7 +52,17 @@ export const PersonalInfoFields = ({ form, reporteeType, validateWebsite }: Pers
       <FormField
         control={form.control}
         name="website"
-        rules={{ validate: validateWebsite }}
+        rules={{ 
+          validate: (value) => {
+            if (!value) return true; // Optional field
+            try {
+              new URL(value.startsWith('http') ? value : `https://${value}`);
+              return true;
+            } catch {
+              return "Please enter a valid website URL";
+            }
+          }
+        }}
         render={({ field }) => (
           <FormItem>
             <FormLabel className="flex items-center gap-2">
