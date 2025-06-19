@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useForm } from "react-hook-form";
-import { Plus } from "lucide-react";
+import { Plus, Instagram, Linkedin } from "lucide-react";
 import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
 interface CreateLoanReportFormData {
@@ -27,9 +28,11 @@ interface CreateLoanReportFormData {
   idType: string;
   idNumber: string;
   idDocument?: FileList;
-  phoneNumber?: string;
-  email?: string;
+  phoneNumber: string;
+  email: string;
   address?: string;
+  instagramProfile?: string;
+  linkedinProfile?: string;
   
   // Supporting Documents
   supportingDocuments?: FileList;
@@ -45,6 +48,7 @@ export const CreateLoanReportDialog = ({
   const [open, setOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("record");
   const [showCollateral, setShowCollateral] = React.useState(false);
+  const [showSocialMedia, setShowSocialMedia] = React.useState(false);
   
   const form = useForm<CreateLoanReportFormData>({
     defaultValues: {
@@ -62,7 +66,9 @@ export const CreateLoanReportDialog = ({
       idNumber: "",
       phoneNumber: "",
       email: "",
-      address: ""
+      address: "",
+      instagramProfile: "",
+      linkedinProfile: ""
     }
   });
 
@@ -70,12 +76,18 @@ export const CreateLoanReportDialog = ({
   const watchReporteeType = form.watch("reporteeType");
 
   const validatePhoneNumber = (value: string) => {
-    if (!value) return true; // Optional field
+    if (!value) return "Phone number is required";
     try {
       return isValidPhoneNumber(value) || "Please enter a valid phone number with country code (e.g., +1234567890)";
     } catch (error) {
       return "Please enter a valid phone number with country code (e.g., +1234567890)";
     }
+  };
+
+  const validateEmail = (value: string) => {
+    if (!value) return "Email is required";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value) || "Please enter a valid email address";
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -95,6 +107,7 @@ export const CreateLoanReportDialog = ({
     setOpen(false);
     setActiveTab("record");
     setShowCollateral(false);
+    setShowSocialMedia(false);
   };
 
   const handleNext = async () => {
@@ -112,6 +125,14 @@ export const CreateLoanReportDialog = ({
       
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
+      // Validate required fields in Reportee Information tab
+      const requiredFields = watchReporteeType === "individual" 
+        ? ["borrowerName", "phoneNumber", "email"]
+        : ["companyName", "phoneNumber", "email"];
+      
+      const isValid = await form.trigger(requiredFields);
+      if (!isValid) return;
+      
       setActiveTab("documents");
     }
   };
@@ -347,7 +368,7 @@ export const CreateLoanReportDialog = ({
                     rules={{ required: "Name is required" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name</FormLabel>
+                        <FormLabel>Full Name *</FormLabel>
                         <FormControl>
                           <Input placeholder="e.g., John Smith" {...field} />
                         </FormControl>
@@ -362,7 +383,7 @@ export const CreateLoanReportDialog = ({
                     rules={{ required: "Company name is required" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Company Name</FormLabel>
+                        <FormLabel>Company Name *</FormLabel>
                         <FormControl>
                           <Input placeholder="e.g., ABC Corporation" {...field} />
                         </FormControl>
@@ -374,11 +395,50 @@ export const CreateLoanReportDialog = ({
 
                 <FormField
                   control={form.control}
-                  name="idType"
-                  rules={{ required: "ID type is required" }}
+                  name="phoneNumber"
+                  rules={{ validate: validatePhoneNumber }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Identification Type</FormLabel>
+                      <FormLabel>Phone Number *</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="e.g., +1234567890" 
+                          {...field}
+                          onChange={(e) => {
+                            const formatted = formatPhoneNumber(e.target.value);
+                            field.onChange(formatted);
+                          }}
+                        />
+                      </FormControl>
+                      <p className="text-sm text-gray-500">
+                        Include country code (e.g., +1 for US, +44 for UK)
+                      </p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  rules={{ validate: validateEmail }}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email *</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="e.g., john@example.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="idType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Identification Type (Optional)</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
@@ -401,10 +461,9 @@ export const CreateLoanReportDialog = ({
                 <FormField
                   control={form.control}
                   name="idNumber"
-                  rules={{ required: "ID number is required" }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>ID Number</FormLabel>
+                      <FormLabel>ID Number (Optional)</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter ID number" {...field} />
                       </FormControl>
@@ -418,52 +477,13 @@ export const CreateLoanReportDialog = ({
                   name="idDocument"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Upload ID Document</FormLabel>
+                      <FormLabel>Upload ID Document (Optional)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
                           accept="image/*,.pdf"
                           onChange={(e) => field.onChange(e.target.files)}
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phoneNumber"
-                  rules={{ validate: validatePhoneNumber }}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone Number (Optional)</FormLabel>
-                      <FormControl>
-                        <Input 
-                          placeholder="e.g., +1234567890" 
-                          {...field}
-                          onChange={(e) => {
-                            const formatted = formatPhoneNumber(e.target.value);
-                            field.onChange(formatted);
-                          }}
-                        />
-                      </FormControl>
-                      <p className="text-sm text-gray-500">
-                        Include country code (e.g., +1 for US, +44 for UK)
-                      </p>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email (Optional)</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="e.g., john@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -483,6 +503,59 @@ export const CreateLoanReportDialog = ({
                     </FormItem>
                   )}
                 />
+
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="addSocialMedia"
+                      checked={showSocialMedia}
+                      onChange={(e) => setShowSocialMedia(e.target.checked)}
+                      className="h-4 w-4"
+                    />
+                    <label htmlFor="addSocialMedia" className="text-sm font-medium">
+                      Add Social Media Profiles (Optional)
+                    </label>
+                  </div>
+
+                  {showSocialMedia && (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name="instagramProfile"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex items-center gap-2">
+                              <Instagram className="h-4 w-4" />
+                              Instagram Profile
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., @username or full URL" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="linkedinProfile"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="flex items-center gap-2">
+                              <Linkedin className="h-4 w-4" />
+                              LinkedIn Profile
+                            </FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., linkedin.com/in/username" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+                </div>
               </TabsContent>
 
               <TabsContent value="documents" className="space-y-4 mt-4">
