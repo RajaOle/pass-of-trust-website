@@ -21,8 +21,9 @@ export const CreateLoanReportDialog = ({
   const [activeTab, setActiveTab] = React.useState("record");
   const [showCollateral, setShowCollateral] = React.useState(false);
   const [showSocialMedia, setShowSocialMedia] = React.useState(false);
+  const [showBankAccount, setShowBankAccount] = React.useState(false);
   
-  const { form, validatePhoneNumber, validateEmail, validateWebsite, formatPhoneNumber } = useCreateLoanReportForm();
+  const { form, validatePhoneNumber, validateEmail, validateWebsite, validateBankAccountNumber, formatPhoneNumber } = useCreateLoanReportForm();
 
   const watchLoanType = form.watch("loanType");
   const watchReporteeType = form.watch("reporteeType");
@@ -34,6 +35,7 @@ export const CreateLoanReportDialog = ({
     setActiveTab("record");
     setShowCollateral(false);
     setShowSocialMedia(false);
+    setShowBankAccount(false);
   };
 
   const handleNext = async () => {
@@ -74,6 +76,13 @@ export const CreateLoanReportDialog = ({
           const websiteValid = await form.trigger("website");
           if (!websiteValid) return;
         }
+      }
+
+      // Validate bank account number if it's provided
+      const bankAccountValue = form.getValues("bankAccountNumber");
+      if (bankAccountValue) {
+        const bankAccountValid = await form.trigger("bankAccountNumber");
+        if (!bankAccountValid) return;
       }
       
       setActiveTab("documents");
@@ -124,9 +133,12 @@ export const CreateLoanReportDialog = ({
                   validatePhoneNumber={validatePhoneNumber}
                   validateEmail={validateEmail}
                   validateWebsite={validateWebsite}
+                  validateBankAccountNumber={validateBankAccountNumber}
                   formatPhoneNumber={formatPhoneNumber}
                   showSocialMedia={showSocialMedia}
                   setShowSocialMedia={setShowSocialMedia}
+                  showBankAccount={showBankAccount}
+                  setShowBankAccount={setShowBankAccount}
                 />
               </TabsContent>
 

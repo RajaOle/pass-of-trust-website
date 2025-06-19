@@ -1,3 +1,4 @@
+
 import { useForm } from "react-hook-form";
 import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
@@ -25,6 +26,8 @@ export interface CreateLoanReportFormData {
   instagramProfile?: string;
   tiktokProfile?: string;
   linkedinProfile?: string;
+  bankName?: string;
+  bankAccountNumber?: string;
   
   // Supporting Documents
   supportingDocuments?: FileList;
@@ -51,7 +54,9 @@ export const useCreateLoanReportForm = () => {
       address: "",
       instagramProfile: "",
       tiktokProfile: "",
-      linkedinProfile: ""
+      linkedinProfile: "",
+      bankName: "",
+      bankAccountNumber: ""
     }
   });
 
@@ -86,6 +91,12 @@ export const useCreateLoanReportForm = () => {
     }
   };
 
+  const validateBankAccountNumber = (value: string) => {
+    if (!value) return true; // Optional field
+    const bankAccountRegex = /^[0-9]{8,20}$/;
+    return bankAccountRegex.test(value) || "Please enter a valid bank account number (8-20 digits)";
+  };
+
   const formatPhoneNumber = (value: string) => {
     if (!value) return value;
     try {
@@ -102,6 +113,7 @@ export const useCreateLoanReportForm = () => {
     validatePhoneNumber,
     validateEmail,
     validateWebsite,
+    validateBankAccountNumber,
     formatPhoneNumber
   };
 };
