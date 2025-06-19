@@ -10,6 +10,10 @@ export const MyReport = () => {
   const [loanReports, setLoanReports] = useState<LoanReport[]>(initialLoanReports);
 
   const handleCreateReport = (data: CreateLoanReportFormData) => {
+    // Determine KYC status based on ID document upload
+    const hasIdDocument = data.idDocument && data.idDocument.length > 0;
+    const kycStatus = hasIdDocument ? "Pending" : "Not Verified";
+
     const newReport: LoanReport = {
       id: loanReports.length + 1,
       uniqueId: `LR-2024-${String(loanReports.length + 1).padStart(3, '0')}-${data.title.substring(0, 3).toUpperCase()}`,
@@ -22,8 +26,8 @@ export const MyReport = () => {
       status: "Under Review",
       loanType: data.loanType,
       dueDate: data.dueDate || null,
-      kycVerified: false,
-      reporteeKycStatus: "Pending",
+      kycVerified: hasIdDocument,
+      reporteeKycStatus: kycStatus,
       recordStatus: "Partially Verified"
     };
 

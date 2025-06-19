@@ -123,6 +123,27 @@ export const ContactInfoFields = ({
 
       <FormField
         control={form.control}
+        name="idDocument"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>ID Document (Optional)</FormLabel>
+            <FormControl>
+              <Input 
+                type="file" 
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                onChange={(e) => field.onChange(e.target.files)}
+              />
+            </FormControl>
+            <p className="text-sm text-gray-500">
+              Upload a copy of your identification document. Accepted formats: PDF, DOC, DOCX, JPG, JPEG, PNG
+            </p>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
         name="address"
         render={({ field }) => (
           <FormItem>
