@@ -37,10 +37,8 @@ export const ReporteeInformationTab = ({
       ];
     } else {
       return [
-        { value: "National ID", label: "National ID" },
-        { value: "Passport", label: "Passport" },
-        { value: "Driver's License", label: "Driver's License" },
-        { value: "Business Registration", label: "Business Registration" }
+        { value: "Tax ID", label: "Tax ID" },
+        { value: "Company Registration Number", label: "Company Registration Number" }
       ];
     }
   };
