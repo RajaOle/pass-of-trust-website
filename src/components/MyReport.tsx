@@ -12,6 +12,7 @@ export const MyReport = () => {
       date: "2024-01-15",
       status: "Completed",
       type: "Business Report",
+      kycVerified: true,
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export const MyReport = () => {
       date: "2024-01-12",
       status: "In Progress",
       type: "Market Report",
+      kycVerified: false,
     },
     {
       id: 3,
@@ -26,6 +28,7 @@ export const MyReport = () => {
       date: "2024-01-08",
       status: "Draft",
       type: "Analysis Report",
+      kycVerified: true,
     },
   ];
 
@@ -64,6 +67,15 @@ export const MyReport = () => {
                       }`}
                     >
                       {report.status}
+                    </span>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        report.kycVerified
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {report.kycVerified ? "KYC Verified" : "Not Verified"}
                     </span>
                   </div>
                 </div>
