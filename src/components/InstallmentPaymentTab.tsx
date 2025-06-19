@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
 import { LoanReport } from "@/types/loanReport";
 import { calculateOutstandingAmount, calculateInstallmentAmount, getNextInstallmentNumber, formatCurrency } from "@/utils/paymentCalculations";
+import { PaymentProofUpload } from "@/components/PaymentProofUpload";
 
 interface InstallmentPaymentTabProps {
   form: UseFormReturn<ProcessPaymentFormData>;
@@ -75,6 +76,8 @@ export const InstallmentPaymentTab = ({ form, report }: InstallmentPaymentTabPro
           </FormItem>
         )}
       />
+
+      <PaymentProofUpload form={form} />
 
       <FormField
         control={form.control}

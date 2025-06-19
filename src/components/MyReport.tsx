@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { LoanReportHeader } from "@/components/LoanReportHeader";
 import { LoanReportCard } from "@/components/LoanReportCard";
@@ -102,6 +103,10 @@ export const MyReport = () => {
 
   const handleProcessPayment = (data: ProcessPaymentFormData) => {
     const now = new Date();
+    
+    // Convert uploaded files to file names for storage
+    const paymentProofFiles = data.paymentProof?.map(file => file.name) || [];
+    
     const paymentRecord: PaymentRecord = {
       id: generatePaymentId(),
       amount: data.paymentAmount,
@@ -109,6 +114,7 @@ export const MyReport = () => {
       timestamp: now.toISOString(),
       type: data.paymentType,
       installmentNumber: data.installmentNumber,
+      paymentProofFiles: paymentProofFiles.length > 0 ? paymentProofFiles : undefined,
     };
 
     setLoanReports(prevReports => 
@@ -126,7 +132,7 @@ export const MyReport = () => {
       )
     );
 
-    console.log("Payment processed successfully");
+    console.log("Payment processed successfully with proof files:", paymentProofFiles);
   };
 
   return (

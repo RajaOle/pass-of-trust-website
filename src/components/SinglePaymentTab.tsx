@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
 import { LoanReport } from "@/types/loanReport";
 import { calculateOutstandingAmount, formatCurrency } from "@/utils/paymentCalculations";
+import { PaymentProofUpload } from "@/components/PaymentProofUpload";
 
 interface SinglePaymentTabProps {
   form: UseFormReturn<ProcessPaymentFormData>;
@@ -68,6 +69,8 @@ export const SinglePaymentTab = ({ form, report }: SinglePaymentTabProps) => {
           </FormItem>
         )}
       />
+
+      <PaymentProofUpload form={form} />
 
       <FormField
         control={form.control}

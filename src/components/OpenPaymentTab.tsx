@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
 import { LoanReport } from "@/types/loanReport";
 import { calculateOutstandingAmount, formatCurrency } from "@/utils/paymentCalculations";
+import { PaymentProofUpload } from "@/components/PaymentProofUpload";
 
 interface OpenPaymentTabProps {
   form: UseFormReturn<ProcessPaymentFormData>;
@@ -45,6 +46,8 @@ export const OpenPaymentTab = ({ form, report }: OpenPaymentTabProps) => {
           </FormItem>
         )}
       />
+
+      <PaymentProofUpload form={form} />
 
       <FormField
         control={form.control}

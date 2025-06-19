@@ -40,4 +40,5 @@ export interface PaymentRecord {
   timestamp: string;
   type: "installment" | "partial" | "full";
   installmentNumber?: number;
+  paymentProofFiles?: string[];
 }

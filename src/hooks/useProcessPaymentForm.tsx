@@ -10,6 +10,7 @@ const processPaymentSchema = z.object({
   paymentType: z.enum(["installment", "partial", "full"]),
   installmentNumber: z.number().optional(),
   notes: z.string().optional(),
+  paymentProof: z.array(z.instanceof(File)).optional(),
 });
 
 export type ProcessPaymentFormData = z.infer<typeof processPaymentSchema>;
@@ -23,6 +24,7 @@ export const useProcessPaymentForm = (report: LoanReport) => {
       paymentType: report.loanType === "Installment" ? "installment" : "partial",
       installmentNumber: undefined,
       notes: "",
+      paymentProof: [],
     },
   });
 
