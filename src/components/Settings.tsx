@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Settings as SettingsIcon, Bell, Shield, User } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Settings as SettingsIcon, Bell, Shield, User, Key } from "lucide-react";
 
 export const Settings = () => {
   return (
@@ -26,6 +27,49 @@ export const Settings = () => {
                 <p className="text-sm text-gray-600">Update your account password</p>
               </div>
               <Button variant="outline">Change Password</Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Key className="h-5 w-5" />
+              <span>API Access</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="client-id" className="text-sm font-medium text-gray-700">
+                Client ID
+              </label>
+              <Input
+                id="client-id"
+                type="text"
+                value="gp_client_1234567890abcdef"
+                readOnly
+                className="bg-gray-50"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="client-secret" className="text-sm font-medium text-gray-700">
+                Client Secret
+              </label>
+              <Input
+                id="client-secret"
+                type="password"
+                value="gp_secret_abcdef1234567890"
+                readOnly
+                className="bg-gray-50"
+              />
+            </div>
+            <div className="pt-2">
+              <Button 
+                variant="outline" 
+                onClick={() => window.open('/developers', '_blank')}
+              >
+                View API Documentation
+              </Button>
             </div>
           </CardContent>
         </Card>
