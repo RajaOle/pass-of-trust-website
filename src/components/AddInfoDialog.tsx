@@ -8,7 +8,7 @@ import { Edit } from "lucide-react";
 import { LoanReport } from "@/types/loanReport";
 import { useAddInfoForm, AddInfoFormData } from "@/hooks/useAddInfoForm";
 import { AddInfoReporteeTab } from "@/components/AddInfoReporteeTab";
-import { ReadOnlySupportingDocumentsTab } from "@/components/ReadOnlySupportingDocumentsTab";
+import { AddInfoSupportingDocumentsTab } from "@/components/AddInfoSupportingDocumentsTab";
 
 interface AddInfoDialogProps {
   report: LoanReport;
@@ -87,7 +87,7 @@ export const AddInfoDialog = ({ report, onAddInfo }: AddInfoDialogProps) => {
               </TabsContent>
               
               <TabsContent value="documents">
-                <ReadOnlySupportingDocumentsTab form={form} />
+                <AddInfoSupportingDocumentsTab />
               </TabsContent>
             </Tabs>
             
