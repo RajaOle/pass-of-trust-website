@@ -126,12 +126,13 @@ export const CreateLoanReportDialog = ({
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       // Validate required fields in Reportee Information tab
-      const requiredFields = watchReporteeType === "individual" 
-        ? ["borrowerName", "phoneNumber", "email"]
-        : ["companyName", "phoneNumber", "email"];
-      
-      const isValid = await form.trigger(requiredFields);
-      if (!isValid) return;
+      if (watchReporteeType === "individual") {
+        const isValid = await form.trigger(["borrowerName", "phoneNumber", "email"]);
+        if (!isValid) return;
+      } else {
+        const isValid = await form.trigger(["companyName", "phoneNumber", "email"]);
+        if (!isValid) return;
+      }
       
       setActiveTab("documents");
     }
