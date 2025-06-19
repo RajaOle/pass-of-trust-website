@@ -18,7 +18,7 @@ export const MyReport = () => {
       dueDate: "2024-02-15",
       kycVerified: true,
       reporteeKycStatus: "Verified",
-      recordStatus: "Processing"
+      recordStatus: "Verified"
     },
     {
       id: 2,
@@ -32,7 +32,7 @@ export const MyReport = () => {
       dueDate: null,
       kycVerified: false,
       reporteeKycStatus: "Pending",
-      recordStatus: "Draft"
+      recordStatus: "Partially Verified"
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export const MyReport = () => {
       dueDate: "2024-02-08",
       kycVerified: true,
       reporteeKycStatus: "Verified",
-      recordStatus: "Submitted"
+      recordStatus: "Verified"
     },
     {
       id: 4,
@@ -60,7 +60,7 @@ export const MyReport = () => {
       dueDate: "2024-12-05",
       kycVerified: true,
       reporteeKycStatus: "Verified",
-      recordStatus: "Completed"
+      recordStatus: "Partially Verified"
     },
   ];
 
@@ -92,14 +92,10 @@ export const MyReport = () => {
 
   const getRecordStatusBadge = (status: string) => {
     switch (status) {
-      case "Completed":
-        return "bg-blue-100 text-blue-800";
-      case "Processing":
-        return "bg-purple-100 text-purple-800";
-      case "Submitted":
-        return "bg-indigo-100 text-indigo-800";
-      case "Draft":
-        return "bg-gray-100 text-gray-800";
+      case "Verified":
+        return "bg-green-100 text-green-800";
+      case "Partially Verified":
+        return "bg-yellow-100 text-yellow-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
