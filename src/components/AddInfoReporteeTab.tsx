@@ -39,8 +39,10 @@ export const AddInfoReporteeTab = ({
 }: AddInfoReporteeTabProps) => {
   const watchReporteeType = form.watch("reporteeType");
   
-  const isFieldReadOnly = (fieldValue: any) => {
-    return fieldValue && fieldValue.trim() !== "";
+  // Check if field was originally populated in the report (read-only)
+  const isFieldOriginallyPopulated = (fieldName: keyof LoanReport) => {
+    const fieldValue = report[fieldName];
+    return fieldValue && String(fieldValue).trim() !== "";
   };
 
   return (
@@ -82,8 +84,8 @@ export const AddInfoReporteeTab = ({
                   <FormControl>
                     <Input 
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('companyName')}
+                      className={isFieldOriginallyPopulated('companyName') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                 </FormItem>
@@ -104,8 +106,8 @@ export const AddInfoReporteeTab = ({
                     <Input 
                       placeholder="e.g., www.company.com"
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('website')}
+                      className={isFieldOriginallyPopulated('website') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -135,8 +137,8 @@ export const AddInfoReporteeTab = ({
                   placeholder="e.g., +1234567890"
                   {...field}
                   onChange={(e) => field.onChange(formatPhoneNumber(e.target.value))}
-                  disabled={isFieldReadOnly(field.value)}
-                  className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                  disabled={isFieldOriginallyPopulated('phoneNumber')}
+                  className={isFieldOriginallyPopulated('phoneNumber') ? "bg-gray-100" : ""}
                 />
               </FormControl>
               <FormMessage />
@@ -159,8 +161,8 @@ export const AddInfoReporteeTab = ({
                   type="email"
                   placeholder="e.g., john@example.com"
                   {...field} 
-                  disabled={isFieldReadOnly(field.value)}
-                  className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                  disabled={isFieldOriginallyPopulated('email')}
+                  className={isFieldOriginallyPopulated('email') ? "bg-gray-100" : ""}
                 />
               </FormControl>
               <FormMessage />
@@ -181,8 +183,8 @@ export const AddInfoReporteeTab = ({
                 <Input 
                   placeholder="Full address"
                   {...field} 
-                  disabled={isFieldReadOnly(field.value)}
-                  className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                  disabled={isFieldOriginallyPopulated('address')}
+                  className={isFieldOriginallyPopulated('address') ? "bg-gray-100" : ""}
                 />
               </FormControl>
             </FormItem>
@@ -220,8 +222,8 @@ export const AddInfoReporteeTab = ({
                     <Input 
                       placeholder="e.g., @username or full URL"
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('instagramProfile')}
+                      className={isFieldOriginallyPopulated('instagramProfile') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                 </FormItem>
@@ -241,8 +243,8 @@ export const AddInfoReporteeTab = ({
                     <Input 
                       placeholder="e.g., @username or full URL"
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('tiktokProfile')}
+                      className={isFieldOriginallyPopulated('tiktokProfile') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                 </FormItem>
@@ -262,8 +264,8 @@ export const AddInfoReporteeTab = ({
                     <Input 
                       placeholder="e.g., linkedin.com/in/username"
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('linkedinProfile')}
+                      className={isFieldOriginallyPopulated('linkedinProfile') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                 </FormItem>
@@ -303,9 +305,9 @@ export const AddInfoReporteeTab = ({
                     <Select 
                       onValueChange={field.onChange} 
                       defaultValue={field.value}
-                      disabled={isFieldReadOnly(field.value)}
+                      disabled={isFieldOriginallyPopulated('bankName')}
                     >
-                      <SelectTrigger className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}>
+                      <SelectTrigger className={isFieldOriginallyPopulated('bankName') ? "bg-gray-100" : ""}>
                         <SelectValue placeholder="Select bank" />
                       </SelectTrigger>
                       <SelectContent>
@@ -335,8 +337,8 @@ export const AddInfoReporteeTab = ({
                     <Input 
                       placeholder="Account number (8-20 digits)"
                       {...field} 
-                      disabled={isFieldReadOnly(field.value)}
-                      className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                      disabled={isFieldOriginallyPopulated('bankAccountNumber')}
+                      className={isFieldOriginallyPopulated('bankAccountNumber') ? "bg-gray-100" : ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -364,9 +366,9 @@ export const AddInfoReporteeTab = ({
                 <Select 
                   onValueChange={field.onChange} 
                   defaultValue={field.value}
-                  disabled={isFieldReadOnly(field.value)}
+                  disabled={isFieldOriginallyPopulated('idType')}
                 >
-                  <SelectTrigger className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}>
+                  <SelectTrigger className={isFieldOriginallyPopulated('idType') ? "bg-gray-100" : ""}>
                     <SelectValue placeholder="Select ID type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -391,8 +393,8 @@ export const AddInfoReporteeTab = ({
                 <Input 
                   placeholder="ID number"
                   {...field} 
-                  disabled={isFieldReadOnly(field.value)}
-                  className={isFieldReadOnly(field.value) ? "bg-gray-100" : ""}
+                  disabled={isFieldOriginallyPopulated('idNumber')}
+                  className={isFieldOriginallyPopulated('idNumber') ? "bg-gray-100" : ""}
                 />
               </FormControl>
             </FormItem>

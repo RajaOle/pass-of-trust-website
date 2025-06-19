@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -28,6 +28,15 @@ export const AddInfoDialog = ({ report, onAddInfo }: AddInfoDialogProps) => {
     validateBankAccountNumber,
     formatPhoneNumber
   } = useAddInfoForm(report);
+
+  // Initialize checkbox states based on existing data
+  useEffect(() => {
+    const hasAnySocialMedia = report.instagramProfile || report.tiktokProfile || report.linkedinProfile;
+    const hasBankInfo = report.bankName || report.bankAccountNumber;
+    
+    setShowSocialMedia(!!hasAnySocialMedia);
+    setShowBankAccount(!!hasBankInfo);
+  }, [report]);
 
   const onSubmit = (data: AddInfoFormData) => {
     console.log("Adding info to report:", data);
