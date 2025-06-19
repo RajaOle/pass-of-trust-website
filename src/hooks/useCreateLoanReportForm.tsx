@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
@@ -31,7 +30,6 @@ export interface CreateLoanReportFormData {
   
   // Supporting Documents
   supportingDocuments?: FileList;
-  supportingDocumentsDescription: string;
 }
 
 export const useCreateLoanReportForm = () => {
@@ -57,8 +55,7 @@ export const useCreateLoanReportForm = () => {
       tiktokProfile: "",
       linkedinProfile: "",
       bankName: "",
-      bankAccountNumber: "",
-      supportingDocumentsDescription: ""
+      bankAccountNumber: ""
     }
   });
 
