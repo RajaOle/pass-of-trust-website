@@ -8,6 +8,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useForm } from "react-hook-form";
 import { Plus } from "lucide-react";
+import { parsePhoneNumber, isValidPhoneNumber, formatIncompletePhoneNumber } from 'libphonenumber-js';
 
 interface CreateLoanReportFormData {
   // Record Information
@@ -67,6 +68,26 @@ export const CreateLoanReportDialog = ({
 
   const watchLoanType = form.watch("loanType");
   const watchReporteeType = form.watch("reporteeType");
+
+  const validatePhoneNumber = (value: string) => {
+    if (!value) return true; // Optional field
+    try {
+      return isValidPhoneNumber(value) || "Please enter a valid phone number with country code (e.g., +1234567890)";
+    } catch (error) {
+      return "Please enter a valid phone number with country code (e.g., +1234567890)";
+    }
+  };
+
+  const formatPhoneNumber = (value: string) => {
+    if (!value) return value;
+    try {
+      // Add + if not present and value starts with a digit
+      const phoneValue = value.startsWith('+') ? value : value.match(/^\d/) ? `+${value}` : value;
+      return formatIncompletePhoneNumber(phoneValue);
+    } catch (error) {
+      return value;
+    }
+  };
 
   const onSubmit = (data: CreateLoanReportFormData) => {
     onCreateReport(data);
@@ -413,12 +434,23 @@ export const CreateLoanReportDialog = ({
                 <FormField
                   control={form.control}
                   name="phoneNumber"
+                  rules={{ validate: validatePhoneNumber }}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Phone Number (Optional)</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., +1234567890" {...field} />
+                        <Input 
+                          placeholder="e.g., +1234567890" 
+                          {...field}
+                          onChange={(e) => {
+                            const formatted = formatPhoneNumber(e.target.value);
+                            field.onChange(formatted);
+                          }}
+                        />
                       </FormControl>
+                      <p className="text-sm text-gray-500">
+                        Include country code (e.g., +1 for US, +44 for UK)
+                      </p>
                       <FormMessage />
                     </FormItem>
                   )}
