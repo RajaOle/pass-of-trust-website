@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,8 @@ import {
   getLoanTypeBadgeVariant,
   getReporteeKycStatusBadge,
   getRecordStatusBadge,
-  formatDueDate
+  formatDueDate,
+  formatLoanAmount
 } from "@/utils/loanReportHelpers";
 
 interface LoanReportCardProps {
@@ -72,7 +72,7 @@ export const LoanReportCard = ({ report, onRestructure, onAddInfo }: LoanReportC
               </div>
               <div className="flex items-center space-x-2">
                 <span className="font-medium text-gray-700">Amount:</span>
-                <span className="font-semibold text-green-600 text-base">{report.loanAmount}</span>
+                <span className="font-semibold text-green-600 text-base">{formatLoanAmount(report.loanAmount)}</span>
               </div>
             </div>
             

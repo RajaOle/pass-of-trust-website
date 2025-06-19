@@ -42,3 +42,16 @@ export const formatDueDate = (dueDate: string | null) => {
   if (!dueDate) return "No Due Date";
   return new Date(dueDate).toLocaleDateString();
 };
+
+export const formatLoanAmount = (amount: string) => {
+  // Remove any existing formatting and extract the numeric value
+  const numericValue = parseFloat(amount.replace(/[^\d.-]/g, ''));
+  
+  if (isNaN(numericValue)) return amount;
+  
+  // Format with dot as thousand separator and 2 decimal places
+  return numericValue.toLocaleString('de-DE', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+};
