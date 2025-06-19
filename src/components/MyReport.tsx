@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -151,11 +150,11 @@ export const MyReport = () => {
                     </span>
                   </div>
 
-                  {/* Borrower and Amount */}
+                  {/* Reportee Name and Amount */}
                   <div className="flex items-center space-x-6 text-sm">
                     <div className="flex items-center space-x-2">
                       <User className="h-4 w-4 text-gray-500" />
-                      <span className="font-medium text-gray-700">Borrower:</span>
+                      <span className="font-medium text-gray-700">Reportee Name:</span>
                       <span className="text-gray-900">{report.borrowerName}</span>
                     </div>
                     <div className="flex items-center space-x-2">
