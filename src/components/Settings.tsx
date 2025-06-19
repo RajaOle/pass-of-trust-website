@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,13 +20,6 @@ export const Settings = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <h4 className="font-medium">Profile Information</h4>
-                <p className="text-sm text-gray-600">Update your personal information</p>
-              </div>
-              <Button variant="outline">Edit Profile</Button>
-            </div>
             <div className="flex justify-between items-center">
               <div>
                 <h4 className="font-medium">Change Password</h4>
