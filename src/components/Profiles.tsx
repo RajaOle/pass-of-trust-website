@@ -1,11 +1,14 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Plus, Edit, Trash2 } from "lucide-react";
 
-export const Profiles = () => {
+interface ProfilesProps {
+  onEditProfile?: () => void;
+}
+
+export const Profiles = ({ onEditProfile }: ProfilesProps) => {
   const profiles = [
     {
       id: 1,
@@ -73,7 +76,7 @@ export const Profiles = () => {
             </CardHeader>
             <CardContent>
               <div className="flex space-x-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={onEditProfile}>
                   <Edit className="h-4 w-4 mr-1" />
                   Edit
                 </Button>

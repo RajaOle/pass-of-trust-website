@@ -9,6 +9,7 @@ import { PurchaseCredit } from "@/components/PurchaseCredit";
 import { Settings } from "@/components/Settings";
 import { Profiles } from "@/components/Profiles";
 import { ContactSupport } from "@/components/ContactSupport";
+import { EditProfile } from "@/components/EditProfile";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -26,7 +27,9 @@ const Dashboard = () => {
       case "settings":
         return <Settings />;
       case "profiles":
-        return <Profiles />;
+        return <Profiles onEditProfile={() => setActiveSection("edit-profile")} />;
+      case "edit-profile":
+        return <EditProfile />;
       case "contact-support":
         return <ContactSupport />;
       default:
