@@ -14,6 +14,7 @@ export const Profiles = () => {
       avatar: "/placeholder.svg",
       initials: "JD",
       active: true,
+      kycVerified: true,
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export const Profiles = () => {
       avatar: "/placeholder.svg",
       initials: "BP",
       active: false,
+      kycVerified: false,
     },
   ];
 
@@ -50,11 +52,22 @@ export const Profiles = () => {
                 <div className="flex-1">
                   <CardTitle className="text-lg">{profile.name}</CardTitle>
                   <p className="text-sm text-gray-600">{profile.description}</p>
-                  {profile.active && (
-                    <span className="inline-block mt-1 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                      Active
+                  <div className="flex items-center space-x-2 mt-1">
+                    {profile.active && (
+                      <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                        Active
+                      </span>
+                    )}
+                    <span
+                      className={`inline-block px-2 py-1 rounded-full text-xs ${
+                        profile.kycVerified
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {profile.kycVerified ? "KYC Verified" : "Not Verified"}
                     </span>
-                  )}
+                  </div>
                 </div>
               </div>
             </CardHeader>
