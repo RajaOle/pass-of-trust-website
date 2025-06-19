@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -101,6 +100,23 @@ export const CreateLoanReportDialog = ({
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       setActiveTab("record");
+    }
+  };
+
+  const getIdTypeOptions = () => {
+    if (watchReporteeType === "individual") {
+      return [
+        { value: "National ID", label: "National ID" },
+        { value: "Passport", label: "Passport" },
+        { value: "Driver's License", label: "Driver's License" }
+      ];
+    } else {
+      return [
+        { value: "National ID", label: "National ID" },
+        { value: "Passport", label: "Passport" },
+        { value: "Driver's License", label: "Driver's License" },
+        { value: "Business Registration", label: "Business Registration" }
+      ];
     }
   };
 
@@ -280,7 +296,11 @@ export const CreateLoanReportDialog = ({
                       <FormLabel>Reportee Type</FormLabel>
                       <FormControl>
                         <RadioGroup
-                          onValueChange={field.onChange}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            // Reset ID type when changing reportee type
+                            form.setValue("idType", "");
+                          }}
                           defaultValue={field.value}
                           className="flex flex-row space-x-6"
                         >
@@ -338,17 +358,18 @@ export const CreateLoanReportDialog = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Identification Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select ID type" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="National ID">National ID</SelectItem>
-                          <SelectItem value="Passport">Passport</SelectItem>
-                          <SelectItem value="Driver's License">Driver's License</SelectItem>
-                          <SelectItem value="Business Registration">Business Registration</SelectItem>
+                          {getIdTypeOptions().map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
