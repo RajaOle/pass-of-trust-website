@@ -4,7 +4,7 @@ import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { upload, X } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
 
 interface PaymentProofUploadProps {
@@ -53,7 +53,7 @@ export const PaymentProofUpload = ({ form }: PaymentProofUploadProps) => {
                   onClick={() => document.getElementById("payment-proof-upload")?.click()}
                   className="w-full"
                 >
-                  <upload className="h-4 w-4 mr-2" />
+                  <Upload className="h-4 w-4 mr-2" />
                   Upload Payment Proof
                 </Button>
               </div>
