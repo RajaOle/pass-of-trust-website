@@ -44,6 +44,7 @@ export const CreateLoanReportDialog = ({
 }: CreateLoanReportDialogProps) => {
   const [open, setOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("record");
+  const [showCollateral, setShowCollateral] = React.useState(false);
   
   const form = useForm<CreateLoanReportFormData>({
     defaultValues: {
@@ -73,10 +74,22 @@ export const CreateLoanReportDialog = ({
     form.reset();
     setOpen(false);
     setActiveTab("record");
+    setShowCollateral(false);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeTab === "record") {
+      // Validate required fields in Record Information tab
+      const isValid = await form.trigger(["title", "loanAmount", "loanType"]);
+      
+      // Also validate repaymentCount if loan type is Installment
+      if (watchLoanType === "Installment") {
+        const repaymentValid = await form.trigger("repaymentCount");
+        if (!isValid || !repaymentValid) return;
+      } else if (!isValid) {
+        return;
+      }
+      
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       setActiveTab("documents");
@@ -117,10 +130,10 @@ export const CreateLoanReportDialog = ({
                 <FormField
                   control={form.control}
                   name="title"
-                  rules={{ required: "Title is required" }}
+                  rules={{ required: "Loan title is required" }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Loan Title</FormLabel>
+                      <FormLabel>Loan Title *</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., Home Mortgage Loan" {...field} />
                       </FormControl>
@@ -135,7 +148,7 @@ export const CreateLoanReportDialog = ({
                   rules={{ required: "Loan amount is required" }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Loan Amount</FormLabel>
+                      <FormLabel>Loan Amount *</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., $350,000" {...field} />
                       </FormControl>
@@ -150,7 +163,7 @@ export const CreateLoanReportDialog = ({
                   rules={{ required: "Loan type is required" }}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Loan Type</FormLabel>
+                      <FormLabel>Loan Type *</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
@@ -172,9 +185,10 @@ export const CreateLoanReportDialog = ({
                   <FormField
                     control={form.control}
                     name="repaymentCount"
+                    rules={{ required: "Repayment count is required for installment loans" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Repayment Count</FormLabel>
+                        <FormLabel>Repayment Count *</FormLabel>
                         <FormControl>
                           <Input type="number" placeholder="e.g., 12" {...field} />
                         </FormControl>
@@ -184,46 +198,63 @@ export const CreateLoanReportDialog = ({
                   />
                 )}
 
-                <FormField
-                  control={form.control}
-                  name="collateralType"
-                  rules={{ required: "Collateral type is required" }}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Collateral Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select collateral type" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Real Estate">Real Estate</SelectItem>
-                          <SelectItem value="Vehicle">Vehicle</SelectItem>
-                          <SelectItem value="Equipment">Equipment</SelectItem>
-                          <SelectItem value="Cash Deposit">Cash Deposit</SelectItem>
-                          <SelectItem value="Other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="addCollateral"
+                      checked={showCollateral}
+                      onChange={(e) => setShowCollateral(e.target.checked)}
+                      className="h-4 w-4"
+                    />
+                    <label htmlFor="addCollateral" className="text-sm font-medium">
+                      Add Collateral Information (Optional)
+                    </label>
+                  </div>
 
-                <FormField
-                  control={form.control}
-                  name="collateralAmount"
-                  rules={{ required: "Collateral amount is required" }}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Collateral Amount</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., $400,000" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
+                  {showCollateral && (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name="collateralType"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Collateral Type</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select collateral type" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="Real Estate">Real Estate</SelectItem>
+                                <SelectItem value="Vehicle">Vehicle</SelectItem>
+                                <SelectItem value="Equipment">Equipment</SelectItem>
+                                <SelectItem value="Cash Deposit">Cash Deposit</SelectItem>
+                                <SelectItem value="Other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="collateralAmount"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Collateral Amount</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., $400,000" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
                   )}
-                />
+                </div>
 
                 <FormField
                   control={form.control}
