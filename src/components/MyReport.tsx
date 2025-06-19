@@ -5,6 +5,7 @@ import { LoanReportCard } from "@/components/LoanReportCard";
 import { loanReports as initialLoanReports } from "@/data/loanReportsData";
 import { LoanReport } from "@/types/loanReport";
 import { CreateLoanReportFormData } from "@/hooks/useCreateLoanReportForm";
+import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
 
 export const MyReport = () => {
   const [loanReports, setLoanReports] = useState<LoanReport[]>(initialLoanReports);
@@ -34,13 +35,35 @@ export const MyReport = () => {
     setLoanReports([newReport, ...loanReports]);
   };
 
+  const handleRestructure = (data: RestructureLoanFormData) => {
+    setLoanReports(prevReports => 
+      prevReports.map(report => 
+        report.id === data.originalReportId
+          ? {
+              ...report,
+              loanType: data.loanType,
+              dueDate: data.dueDate || null,
+              status: "Under Review", // Reset status when restructured
+              recordStatus: "Partially Verified" // Update record status
+            }
+          : report
+      )
+    );
+
+    console.log("Report restructured successfully");
+  };
+
   return (
     <div className="space-y-6">
       <LoanReportHeader onCreateReport={handleCreateReport} />
       
       <div className="grid gap-4">
         {loanReports.map((report) => (
-          <LoanReportCard key={report.id} report={report} />
+          <LoanReportCard 
+            key={report.id} 
+            report={report} 
+            onRestructure={handleRestructure}
+          />
         ))}
       </div>
     </div>

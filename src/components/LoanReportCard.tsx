@@ -3,8 +3,10 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Calendar, CreditCard, Hash, User, Activity } from "lucide-react";
+import { Calendar, CreditCard, Hash, User, Activity } from "lucide-react";
 import { LoanReport } from "@/types/loanReport";
+import { RestructureLoanDialog } from "@/components/RestructureLoanDialog";
+import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
 import {
   getLoanTypeBadgeVariant,
   getReporteeKycStatusBadge,
@@ -14,9 +16,17 @@ import {
 
 interface LoanReportCardProps {
   report: LoanReport;
+  onRestructure?: (data: RestructureLoanFormData) => void;
 }
 
-export const LoanReportCard = ({ report }: LoanReportCardProps) => {
+export const LoanReportCard = ({ report, onRestructure }: LoanReportCardProps) => {
+  const handleRestructure = (data: RestructureLoanFormData) => {
+    console.log("Restructuring report:", report.id, "with data:", data);
+    if (onRestructure) {
+      onRestructure(data);
+    }
+  };
+
   return (
     <Card className="hover:shadow-md transition-shadow">
       <CardContent className="p-6">
@@ -96,10 +106,10 @@ export const LoanReportCard = ({ report }: LoanReportCardProps) => {
           
           {/* Action buttons */}
           <div className="flex flex-col space-y-2 ml-6">
-            <Button variant="outline" size="sm" className="w-28">
-              <FileText className="h-4 w-4 mr-1" />
-              Restructure
-            </Button>
+            <RestructureLoanDialog 
+              report={report} 
+              onRestructure={handleRestructure}
+            />
             <Button variant="default" size="sm" className="w-28 bg-blue-600 hover:bg-blue-700">
               <Activity className="h-4 w-4 mr-1" />
               Process
