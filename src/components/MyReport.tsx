@@ -13,7 +13,7 @@ export const MyReport = () => {
       id: loanReports.length + 1,
       uniqueId: `LR-2024-${String(loanReports.length + 1).padStart(3, '0')}-${data.title.substring(0, 3).toUpperCase()}`,
       title: data.title,
-      borrowerName: data.borrowerName,
+      borrowerName: data.reporteeType === "individual" ? data.borrowerName : data.companyName,
       loanAmount: data.loanAmount,
       date: new Date().toISOString().split('T')[0],
       status: "Under Review",
