@@ -41,7 +41,7 @@ export const CreateLoanReportDialog = ({
   const handleNext = async () => {
     if (activeTab === "record") {
       // Validate required fields in Record Information tab
-      const fieldsToValidate = ["title", "loanAmount", "loanType"];
+      const fieldsToValidate: (keyof CreateLoanReportFormData)[] = ["title", "loanAmount", "loanType"];
       
       // Also validate repaymentCount if loan type is Installment
       if (watchLoanType === "Installment") {
@@ -54,7 +54,7 @@ export const CreateLoanReportDialog = ({
       setActiveTab("reportee");
     } else if (activeTab === "reportee") {
       // Validate required fields in Reportee Information tab
-      let fieldsToValidate: string[] = [];
+      let fieldsToValidate: (keyof CreateLoanReportFormData)[] = [];
       
       if (watchReporteeType === "individual") {
         fieldsToValidate = ["borrowerName", "phoneNumber", "email"];
@@ -64,9 +64,9 @@ export const CreateLoanReportDialog = ({
       }
       
       // Always validate these fields if they have values
-      const optionalFields = ["email", "website", "bankAccountNumber"];
-      for (const field of optionalFields) {
-        const value = form.getValues(field as keyof CreateLoanReportFormData);
+      const optionalFieldsToCheck: (keyof CreateLoanReportFormData)[] = ["email", "website", "bankAccountNumber"];
+      for (const field of optionalFieldsToCheck) {
+        const value = form.getValues(field);
         if (value) {
           fieldsToValidate.push(field);
         }
