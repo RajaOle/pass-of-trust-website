@@ -213,24 +213,6 @@ export const ReporteeInformationTab = ({
 
       <FormField
         control={form.control}
-        name="idDocument"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Upload ID Document (Optional)</FormLabel>
-            <FormControl>
-              <Input
-                type="file"
-                accept="image/*,.pdf"
-                onChange={(e) => field.onChange(e.target.files)}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
         name="address"
         render={({ field }) => (
           <FormItem>
