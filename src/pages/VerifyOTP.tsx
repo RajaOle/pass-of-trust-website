@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 const VerifyOTP = () => {
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resendCooldown, setResendCooldown] = useState(180);
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -109,7 +108,7 @@ const VerifyOTP = () => {
         description: "A new verification code has been sent to your phone number.",
       });
       
-      setResendCooldown(60);
+      setResendCooldown(180);
       setOtp(""); // Clear current OTP
     } catch (error) {
       toast({
@@ -124,6 +123,12 @@ const VerifyOTP = () => {
 
   const handleGoBack = () => {
     navigate("/signup");
+  };
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   if (!phoneNumber) {
@@ -200,7 +205,7 @@ const VerifyOTP = () => {
                   className="w-full"
                 >
                   {resendCooldown > 0 
-                    ? `Resend SMS in ${resendCooldown}s` 
+                    ? `Resend SMS in ${formatTime(resendCooldown)}` 
                     : "Resend verification SMS"
                   }
                 </Button>
