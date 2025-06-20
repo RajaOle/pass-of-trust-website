@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { DollarSign, Building, User, FileText } from 'lucide-react';
 import { useKYC } from '@/hooks/useKYC';
 import { useLoanApplication } from '@/hooks/useLoanApplication';
-import { LoanApplication } from '@/types/kyc';
+import { LoanApplication, LoanApplicationFormData } from '@/types/kyc';
 
 interface LoanApplicationFormProps {
   onSubmitted?: (application: LoanApplication) => void;
@@ -20,7 +20,7 @@ export const LoanApplicationForm = ({ onSubmitted }: LoanApplicationFormProps) =
   const { kycProfile } = useKYC();
   const { createLoanApplication, updateLoanApplication, submitLoanApplication, currentApplication } = useLoanApplication();
   
-  const [formData, setFormData] = useState<Partial<LoanApplication>>({
+  const [formData, setFormData] = useState<Partial<LoanApplicationFormData>>({
     loan_amount: 0,
     loan_purpose: '',
     loan_term_months: 12,
@@ -40,11 +40,16 @@ export const LoanApplicationForm = ({ onSubmitted }: LoanApplicationFormProps) =
 
   useEffect(() => {
     if (currentApplication) {
-      setFormData(currentApplication);
+      // Convert database borrower_type string to form union type
+      const borrowerType = currentApplication.borrower_type === 'company' ? 'company' : 'individual';
+      setFormData({
+        ...currentApplication,
+        borrower_type: borrowerType,
+      });
     }
   }, [currentApplication]);
 
-  const handleInputChange = (field: keyof LoanApplication, value: string | number) => {
+  const handleInputChange = (field: keyof LoanApplicationFormData, value: string | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

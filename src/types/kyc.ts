@@ -42,7 +42,7 @@ export interface LoanApplication {
   loan_purpose?: string;
   loan_term_months?: number;
   interest_rate?: number;
-  borrower_type: 'individual' | 'company';
+  borrower_type: string; // Changed from union type to string to match database
   company_name?: string;
   company_registration_number?: string;
   monthly_income?: number;
@@ -58,4 +58,9 @@ export interface LoanApplication {
   rejection_reason?: string;
   created_at: string;
   updated_at: string;
+}
+
+// Helper type for form data with proper borrower_type union
+export interface LoanApplicationFormData extends Omit<LoanApplication, 'borrower_type'> {
+  borrower_type: 'individual' | 'company';
 }

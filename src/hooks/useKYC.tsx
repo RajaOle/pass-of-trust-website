@@ -25,7 +25,7 @@ export const useKYC = () => {
         throw error;
       }
 
-      setKycProfile(data);
+      setKycProfile(data as KYCProfile);
     } catch (error) {
       console.error('Error fetching KYC profile:', error);
       toast({
@@ -47,7 +47,7 @@ export const useKYC = () => {
         .order('uploaded_at', { ascending: false });
 
       if (error) throw error;
-      setKycDocuments(data || []);
+      setKycDocuments((data || []) as KYCDocument[]);
     } catch (error) {
       console.error('Error fetching KYC documents:', error);
     }
@@ -58,24 +58,41 @@ export const useKYC = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('User not authenticated');
 
+      // Ensure phone_number is provided since it's required in the database
+      if (!profileData.phone_number) {
+        throw new Error('Phone number is required');
+      }
+
       const { data, error } = await supabase
         .from('kyc_profiles')
         .insert({
           user_id: user.id,
-          ...profileData,
+          phone_number: profileData.phone_number,
+          phone_verified: profileData.phone_verified || false,
+          first_name: profileData.first_name,
+          last_name: profileData.last_name,
+          date_of_birth: profileData.date_of_birth,
+          national_id_number: profileData.national_id_number,
+          address_line1: profileData.address_line1,
+          address_line2: profileData.address_line2,
+          city: profileData.city,
+          state: profileData.state,
+          postal_code: profileData.postal_code,
+          country: profileData.country,
+          kyc_status: profileData.kyc_status || 'not_started',
         })
         .select()
         .single();
 
       if (error) throw error;
 
-      setKycProfile(data);
+      setKycProfile(data as KYCProfile);
       toast({
         title: "Success",
         description: "KYC profile created successfully",
       });
 
-      return data;
+      return data as KYCProfile;
     } catch (error) {
       console.error('Error creating KYC profile:', error);
       toast({
@@ -100,13 +117,13 @@ export const useKYC = () => {
 
       if (error) throw error;
 
-      setKycProfile(data);
+      setKycProfile(data as KYCProfile);
       toast({
         title: "Success",
         description: "KYC profile updated successfully",
       });
 
-      return data;
+      return data as KYCProfile;
     } catch (error) {
       console.error('Error updating KYC profile:', error);
       toast({
@@ -149,13 +166,13 @@ export const useKYC = () => {
 
       if (error) throw error;
 
-      setKycDocuments(prev => [data, ...prev]);
+      setKycDocuments(prev => [data as KYCDocument, ...prev]);
       toast({
         title: "Success",
         description: "Document uploaded successfully",
       });
 
-      return data;
+      return data as KYCDocument;
     } catch (error) {
       console.error('Error uploading document:', error);
       toast({

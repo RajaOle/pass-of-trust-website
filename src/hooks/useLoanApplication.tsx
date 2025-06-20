@@ -22,7 +22,7 @@ export const useLoanApplication = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setLoanApplications(data || []);
+      setLoanApplications((data || []) as LoanApplication[]);
     } catch (error) {
       console.error('Error fetching loan applications:', error);
       toast({
@@ -38,26 +38,50 @@ export const useLoanApplication = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('User not authenticated');
 
+      // Ensure required fields are provided
+      if (!applicationData.kyc_profile_id) {
+        throw new Error('KYC profile ID is required');
+      }
+
+      if (!applicationData.loan_amount) {
+        throw new Error('Loan amount is required');
+      }
+
       const { data, error } = await supabase
         .from('loan_applications')
         .insert({
           user_id: user.id,
-          ...applicationData,
+          kyc_profile_id: applicationData.kyc_profile_id,
+          loan_amount: applicationData.loan_amount,
+          loan_purpose: applicationData.loan_purpose,
+          loan_term_months: applicationData.loan_term_months,
+          interest_rate: applicationData.interest_rate,
+          borrower_type: applicationData.borrower_type || 'individual',
+          company_name: applicationData.company_name,
+          company_registration_number: applicationData.company_registration_number,
+          monthly_income: applicationData.monthly_income,
+          employment_status: applicationData.employment_status,
+          employer_name: applicationData.employer_name,
+          collateral_type: applicationData.collateral_type,
+          collateral_value: applicationData.collateral_value,
+          collateral_description: applicationData.collateral_description,
+          status: applicationData.status || 'draft',
         })
         .select()
         .single();
 
       if (error) throw error;
 
-      setLoanApplications(prev => [data, ...prev]);
-      setCurrentApplication(data);
+      const newApplication = data as LoanApplication;
+      setLoanApplications(prev => [newApplication, ...prev]);
+      setCurrentApplication(newApplication);
       
       toast({
         title: "Success",
         description: "Loan application created successfully",
       });
 
-      return data;
+      return newApplication;
     } catch (error) {
       console.error('Error creating loan application:', error);
       toast({
@@ -80,12 +104,13 @@ export const useLoanApplication = () => {
 
       if (error) throw error;
 
+      const updatedApplication = data as LoanApplication;
       setLoanApplications(prev => 
-        prev.map(app => app.id === applicationId ? data : app)
+        prev.map(app => app.id === applicationId ? updatedApplication : app)
       );
       
       if (currentApplication?.id === applicationId) {
-        setCurrentApplication(data);
+        setCurrentApplication(updatedApplication);
       }
 
       toast({
@@ -93,7 +118,7 @@ export const useLoanApplication = () => {
         description: "Loan application updated successfully",
       });
 
-      return data;
+      return updatedApplication;
     } catch (error) {
       console.error('Error updating loan application:', error);
       toast({
