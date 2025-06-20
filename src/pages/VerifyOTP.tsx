@@ -39,8 +39,8 @@ const VerifyOTP = () => {
   const handleVerifyOTP = async () => {
     if (otp.length !== 6) {
       toast({
-        title: "Invalid OTP",
-        description: "Please enter a complete 6-digit code.",
+        title: "Invalid Code",
+        description: "Please enter the complete 6-digit verification code.",
         variant: "destructive",
       });
       return;
@@ -66,8 +66,8 @@ const VerifyOTP = () => {
 
       if (data.user) {
         toast({
-          title: "Email Verified!",
-          description: "Your account has been verified successfully.",
+          title: "Email Verified Successfully!",
+          description: "Your account has been verified. Welcome to Goodpass!",
         });
         
         // Navigate to onboarding
@@ -84,7 +84,7 @@ const VerifyOTP = () => {
     }
   };
 
-  const handleResendOTP = async () => {
+  const handleResendCode = async () => {
     if (resendCooldown > 0) return;
 
     setIsLoading(true);
@@ -97,7 +97,7 @@ const VerifyOTP = () => {
 
       if (error) {
         toast({
-          title: "Resend Failed",
+          title: "Failed to Resend",
           description: error.message,
           variant: "destructive",
         });
@@ -105,8 +105,8 @@ const VerifyOTP = () => {
       }
 
       toast({
-        title: "Code Resent",
-        description: "A new verification code has been sent to your email.",
+        title: "Verification Code Sent",
+        description: "A new verification code has been sent to your email address.",
       });
       
       setResendCooldown(60);
@@ -114,7 +114,7 @@ const VerifyOTP = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to resend code. Please try again.",
+        description: "Failed to resend verification code. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -142,11 +142,14 @@ const VerifyOTP = () => {
           <Mail className="h-16 w-16 text-blue-500" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-          Verify your email
+          Check your email
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          We've sent a 6-digit code to{' '}
+          We've sent a 6-digit verification code to{' '}
           <span className="font-medium text-gray-900">{email}</span>
+        </p>
+        <p className="mt-1 text-center text-xs text-gray-500">
+          Please check your inbox and enter the code below to verify your email address.
         </p>
       </div>
 
@@ -154,6 +157,9 @@ const VerifyOTP = () => {
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center">Enter verification code</CardTitle>
+            <p className="text-center text-sm text-gray-600">
+              Enter the 6-digit code sent to your email
+            </p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
@@ -180,24 +186,27 @@ const VerifyOTP = () => {
                 className="w-full bg-blue-600 hover:bg-blue-700"
                 disabled={isLoading || otp.length !== 6}
               >
-                {isLoading ? "Verifying..." : "Verify Email"}
+                {isLoading ? "Verifying..." : "Verify Email Address"}
               </Button>
 
               <div className="text-center space-y-2">
                 <p className="text-sm text-gray-600">
-                  Didn't receive the code?
+                  Didn't receive the email?
                 </p>
                 <Button
                   variant="outline"
-                  onClick={handleResendOTP}
+                  onClick={handleResendCode}
                   disabled={isLoading || resendCooldown > 0}
                   className="w-full"
                 >
                   {resendCooldown > 0 
-                    ? `Resend code in ${resendCooldown}s` 
-                    : "Resend code"
+                    ? `Resend email in ${resendCooldown}s` 
+                    : "Resend verification email"
                   }
                 </Button>
+                <p className="text-xs text-gray-500 mt-2">
+                  Check your spam folder if you don't see the email in your inbox.
+                </p>
               </div>
 
               <Button
