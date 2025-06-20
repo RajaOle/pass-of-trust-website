@@ -11,6 +11,7 @@ import { ProcessPaymentDialog } from "@/components/ProcessPaymentDialog";
 import { RestructureLoanFormData } from "@/hooks/useRestructureLoanForm";
 import { AddInfoFormData } from "@/hooks/useAddInfoForm";
 import { ProcessPaymentFormData } from "@/hooks/useProcessPaymentForm";
+import { calculateOutstandingAmount, formatCurrency } from "@/utils/paymentCalculations";
 import {
   getLoanTypeBadgeVariant,
   getReporteeKycStatusBadge,
@@ -48,6 +49,8 @@ export const LoanReportCard = ({ report, onRestructure, onAddInfo, onProcessPaym
     }
   };
 
+  const outstandingAmount = calculateOutstandingAmount(report);
+
   return (
     <Card className="hover:shadow-md transition-shadow">
       <CardContent className="p-6">
@@ -74,16 +77,22 @@ export const LoanReportCard = ({ report, onRestructure, onAddInfo, onProcessPaym
               </span>
             </div>
 
-            {/* Reportee Name and Amount */}
+            {/* Reportee Name and Amounts */}
             <div className="flex items-center space-x-6 text-sm">
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4 text-gray-500" />
                 <span className="font-medium text-gray-700">Reportee Name:</span>
                 <span className="text-gray-900">{report.borrowerName}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-medium text-gray-700">Amount:</span>
-                <span className="font-semibold text-green-600 text-base">{formatLoanAmount(report.loanAmount)}</span>
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center space-x-2">
+                  <span className="font-medium text-gray-700">Initial Amount:</span>
+                  <span className="font-semibold text-blue-600 text-base">{formatLoanAmount(report.loanAmount)}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="font-medium text-gray-700">Outstanding:</span>
+                  <span className="font-semibold text-red-600 text-base">{formatCurrency(outstandingAmount)}</span>
+                </div>
               </div>
             </div>
             
