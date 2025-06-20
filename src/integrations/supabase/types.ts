@@ -9,42 +9,7 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          ai_companion_id: string | null
-          boob_size: string | null
-          created_at: string
-          hair_color: string | null
-          hair_style: string | null
-          id: string
-          outfit_type: string | null
-          phone_number: string | null
-          updated_at: string
-        }
-        Insert: {
-          ai_companion_id?: string | null
-          boob_size?: string | null
-          created_at?: string
-          hair_color?: string | null
-          hair_style?: string | null
-          id: string
-          outfit_type?: string | null
-          phone_number?: string | null
-          updated_at?: string
-        }
-        Update: {
-          ai_companion_id?: string | null
-          boob_size?: string | null
-          created_at?: string
-          hair_color?: string | null
-          hair_style?: string | null
-          id?: string
-          outfit_type?: string | null
-          phone_number?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
