@@ -132,7 +132,7 @@ export const InquiryDialog = ({ open, onOpenChange }: InquiryDialogProps) => {
         <Checkbox
           id="terms"
           checked={termsAccepted}
-          onCheckedChange={setTermsAccepted}
+          onCheckedChange={(checked) => setTermsAccepted(checked === true)}
         />
         <Label htmlFor="terms" className="text-sm">
           I accept the terms of use and data usage policy
