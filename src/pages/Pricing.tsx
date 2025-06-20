@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Pricing = () => {
@@ -47,11 +47,11 @@ const Pricing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-              Simple, Transparent
+              Simple, Credit-Based
               <span className="text-blue-600 block mt-1">Pricing</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Choose the plan that works best for you. Start building your financial reputation today.
+              Buy credits to make inquiries and access reports. Pay only for what you use with no monthly commitments.
             </p>
           </div>
         </div>
@@ -60,29 +60,29 @@ const Pricing = () => {
       {/* Pricing Cards */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Free Plan */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Basic Package */}
             <Card className="border-gray-200 hover:shadow-lg transition-shadow">
               <CardHeader className="text-center pb-2">
-                <CardTitle className="text-2xl font-bold text-gray-900">Free</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Basic</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">$0</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold text-gray-900">Rp 50K</span>
+                  <div className="text-gray-600 text-sm mt-1">Rp 1,000 per credit</div>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">5 reports per month</span>
+                    <span className="text-gray-700">50 inquiry credits</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Basic inquiries</span>
+                    <span className="text-gray-700">Valid for 6 months</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Community support</span>
+                    <span className="text-gray-700">Basic support</span>
                   </li>
                 </ul>
                 <Button className="w-full bg-gray-600 hover:bg-gray-700 text-white">
@@ -91,78 +91,106 @@ const Pricing = () => {
               </CardContent>
             </Card>
 
-            {/* Pro Plan */}
+            {/* Standard Package */}
             <Card className="border-blue-200 hover:shadow-lg transition-shadow relative">
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
+                <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+                  <Star className="h-3 w-3" />
+                  <span>Most Popular</span>
                 </span>
               </div>
               <CardHeader className="text-center pb-2 pt-8">
-                <CardTitle className="text-2xl font-bold text-gray-900">Pro</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Standard</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">$29</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold text-gray-900">Rp 140K</span>
+                  <div className="text-gray-600 text-sm mt-1">Rp 933 per credit</div>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Unlimited reports</span>
+                    <span className="text-gray-700">150 inquiry credits</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Advanced inquiries</span>
+                    <span className="text-gray-700">Valid for 12 months</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">6% savings</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
                     <span className="text-gray-700">Priority support</span>
                   </li>
-                  <li className="flex items-center">
-                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Analytics dashboard</span>
-                  </li>
-                  <li className="flex items-center">
-                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">API access</span>
-                  </li>
                 </ul>
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  Start Free Trial
+                  Buy Credits
                 </Button>
               </CardContent>
             </Card>
 
-            {/* Enterprise Plan */}
+            {/* Premium Package */}
             <Card className="border-gray-200 hover:shadow-lg transition-shadow">
               <CardHeader className="text-center pb-2">
-                <CardTitle className="text-2xl font-bold text-gray-900">Enterprise</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Premium</CardTitle>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">Custom</span>
+                  <span className="text-4xl font-bold text-gray-900">Rp 225K</span>
+                  <div className="text-gray-600 text-sm mt-1">Rp 900 per credit</div>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Everything in Pro</span>
+                    <span className="text-gray-700">250 inquiry credits</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Custom integrations</span>
+                    <span className="text-gray-700">Valid for 18 months</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">10% savings</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">Priority support</span>
+                  </li>
+                </ul>
+                <Button className="w-full bg-gray-600 hover:bg-gray-700 text-white">
+                  Buy Credits
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Enterprise Package */}
+            <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+              <CardHeader className="text-center pb-2">
+                <CardTitle className="text-2xl font-bold text-gray-900">Enterprise</CardTitle>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-gray-900">Rp 425K</span>
+                  <div className="text-gray-600 text-sm mt-1">Rp 850 per credit</div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">500 inquiry credits</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">Valid for 24 months</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
+                    <span className="text-gray-700">15% savings</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
                     <span className="text-gray-700">Dedicated support</span>
-                  </li>
-                  <li className="flex items-center">
-                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">White-label solution</span>
-                  </li>
-                  <li className="flex items-center">
-                    <Check className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">SLA guarantee</span>
                   </li>
                 </ul>
                 <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:bg-gray-50">
@@ -185,18 +213,26 @@ const Pricing = () => {
           <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                How does the free trial work?
+                How do credits work?
               </h3>
               <p className="text-gray-600">
-                You get 14 days of full Pro access with no commitment. Cancel anytime during the trial period.
+                Each inquiry or report request uses 1 credit. Credits are valid for the specified duration and never expire within that period.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Can I change plans anytime?
+                Can I buy more credits anytime?
               </h3>
               <p className="text-gray-600">
-                Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.
+                Yes, you can purchase additional credits at any time. New credits will be added to your existing balance.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                What happens if I don't use all my credits?
+              </h3>
+              <p className="text-gray-600">
+                Credits remain valid for the specified duration (6-24 months depending on the package). You can use them at your own pace.
               </p>
             </div>
             <div>
@@ -204,7 +240,7 @@ const Pricing = () => {
                 Is my data secure?
               </h3>
               <p className="text-gray-600">
-                Absolutely. We use bank-level encryption and security measures to protect all your data.
+                Absolutely. We use bank-level encryption and security measures to protect all your data and transactions.
               </p>
             </div>
           </div>
