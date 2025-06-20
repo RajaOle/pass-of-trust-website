@@ -9,6 +9,65 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      active_loans: {
+        Row: {
+          created_at: string | null
+          disbursed_at: string
+          id: string
+          interest_rate: number
+          loan_application_id: string
+          maturity_date: string
+          monthly_payment: number
+          next_payment_date: string | null
+          outstanding_balance: number
+          payments_made: number | null
+          principal_amount: number
+          term_months: number
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          disbursed_at: string
+          id?: string
+          interest_rate: number
+          loan_application_id: string
+          maturity_date: string
+          monthly_payment: number
+          next_payment_date?: string | null
+          outstanding_balance: number
+          payments_made?: number | null
+          principal_amount: number
+          term_months: number
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          disbursed_at?: string
+          id?: string
+          interest_rate?: number
+          loan_application_id?: string
+          maturity_date?: string
+          monthly_payment?: number
+          next_payment_date?: string | null
+          outstanding_balance?: number
+          payments_made?: number | null
+          principal_amount?: number
+          term_months?: number
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "active_loans_loan_application_id_fkey"
+            columns: ["loan_application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       inquiries: {
         Row: {
           created_at: string | null
@@ -29,6 +88,311 @@ export type Database = {
           subject_id?: string | null
         }
         Relationships: []
+      }
+      kyc_documents: {
+        Row: {
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          kyc_profile_id: string
+          mime_type: string | null
+          uploaded_at: string | null
+          verification_notes: string | null
+          verification_status:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at: string | null
+        }
+        Insert: {
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          kyc_profile_id: string
+          mime_type?: string | null
+          uploaded_at?: string | null
+          verification_notes?: string | null
+          verification_status?:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at?: string | null
+        }
+        Update: {
+          document_type?: Database["public"]["Enums"]["document_type"]
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          kyc_profile_id?: string
+          mime_type?: string | null
+          uploaded_at?: string | null
+          verification_notes?: string | null
+          verification_status?:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kyc_documents_kyc_profile_id_fkey"
+            columns: ["kyc_profile_id"]
+            isOneToOne: false
+            referencedRelation: "kyc_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kyc_profiles: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          city: string | null
+          country: string | null
+          created_at: string | null
+          date_of_birth: string | null
+          first_name: string | null
+          id: string
+          kyc_completed_at: string | null
+          kyc_status: Database["public"]["Enums"]["kyc_status"] | null
+          last_name: string | null
+          national_id_number: string | null
+          phone_number: string
+          phone_verified: boolean | null
+          postal_code: string | null
+          state: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          first_name?: string | null
+          id?: string
+          kyc_completed_at?: string | null
+          kyc_status?: Database["public"]["Enums"]["kyc_status"] | null
+          last_name?: string | null
+          national_id_number?: string | null
+          phone_number: string
+          phone_verified?: boolean | null
+          postal_code?: string | null
+          state?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          first_name?: string | null
+          id?: string
+          kyc_completed_at?: string | null
+          kyc_status?: Database["public"]["Enums"]["kyc_status"] | null
+          last_name?: string | null
+          national_id_number?: string | null
+          phone_number?: string
+          phone_verified?: boolean | null
+          postal_code?: string | null
+          state?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      loan_application_documents: {
+        Row: {
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_path: string
+          file_size: number | null
+          id: string
+          loan_application_id: string
+          mime_type: string | null
+          uploaded_at: string | null
+        }
+        Insert: {
+          document_type: Database["public"]["Enums"]["document_type"]
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          id?: string
+          loan_application_id: string
+          mime_type?: string | null
+          uploaded_at?: string | null
+        }
+        Update: {
+          document_type?: Database["public"]["Enums"]["document_type"]
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          loan_application_id?: string
+          mime_type?: string | null
+          uploaded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loan_application_documents_loan_application_id_fkey"
+            columns: ["loan_application_id"]
+            isOneToOne: false
+            referencedRelation: "loan_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      loan_applications: {
+        Row: {
+          approved_at: string | null
+          borrower_type: string | null
+          collateral_description: string | null
+          collateral_type: string | null
+          collateral_value: number | null
+          company_name: string | null
+          company_registration_number: string | null
+          created_at: string | null
+          employer_name: string | null
+          employment_status: string | null
+          id: string
+          interest_rate: number | null
+          kyc_profile_id: string
+          loan_amount: number
+          loan_purpose: string | null
+          loan_term_months: number | null
+          monthly_income: number | null
+          rejected_at: string | null
+          rejection_reason: string | null
+          status: Database["public"]["Enums"]["loan_status"] | null
+          submitted_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          approved_at?: string | null
+          borrower_type?: string | null
+          collateral_description?: string | null
+          collateral_type?: string | null
+          collateral_value?: number | null
+          company_name?: string | null
+          company_registration_number?: string | null
+          created_at?: string | null
+          employer_name?: string | null
+          employment_status?: string | null
+          id?: string
+          interest_rate?: number | null
+          kyc_profile_id: string
+          loan_amount: number
+          loan_purpose?: string | null
+          loan_term_months?: number | null
+          monthly_income?: number | null
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          status?: Database["public"]["Enums"]["loan_status"] | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          approved_at?: string | null
+          borrower_type?: string | null
+          collateral_description?: string | null
+          collateral_type?: string | null
+          collateral_value?: number | null
+          company_name?: string | null
+          company_registration_number?: string | null
+          created_at?: string | null
+          employer_name?: string | null
+          employment_status?: string | null
+          id?: string
+          interest_rate?: number | null
+          kyc_profile_id?: string
+          loan_amount?: number
+          loan_purpose?: string | null
+          loan_term_months?: number | null
+          monthly_income?: number | null
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          status?: Database["public"]["Enums"]["loan_status"] | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loan_applications_kyc_profile_id_fkey"
+            columns: ["kyc_profile_id"]
+            isOneToOne: false
+            referencedRelation: "kyc_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      loan_payments: {
+        Row: {
+          active_loan_id: string
+          created_at: string | null
+          id: string
+          interest_amount: number
+          payment_amount: number
+          payment_date: string
+          payment_method: string | null
+          payment_proof_file_path: string | null
+          principal_amount: number
+          user_id: string
+          verification_status:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at: string | null
+        }
+        Insert: {
+          active_loan_id: string
+          created_at?: string | null
+          id?: string
+          interest_amount: number
+          payment_amount: number
+          payment_date: string
+          payment_method?: string | null
+          payment_proof_file_path?: string | null
+          principal_amount: number
+          user_id: string
+          verification_status?:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at?: string | null
+        }
+        Update: {
+          active_loan_id?: string
+          created_at?: string | null
+          id?: string
+          interest_amount?: number
+          payment_amount?: number
+          payment_date?: string
+          payment_method?: string | null
+          payment_proof_file_path?: string | null
+          principal_amount?: number
+          user_id?: string
+          verification_status?:
+            | Database["public"]["Enums"]["verification_status"]
+            | null
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loan_payments_active_loan_id_fkey"
+            columns: ["active_loan_id"]
+            isOneToOne: false
+            referencedRelation: "active_loans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       loans: {
         Row: {
@@ -201,7 +565,26 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      document_type:
+        | "national_id"
+        | "passport"
+        | "drivers_license"
+        | "utility_bill"
+        | "bank_statement"
+        | "income_proof"
+        | "collateral_document"
+        | "other"
+      kyc_status: "not_started" | "pending" | "approved" | "rejected"
+      loan_status:
+        | "draft"
+        | "submitted"
+        | "under_review"
+        | "approved"
+        | "rejected"
+        | "active"
+        | "completed"
+        | "defaulted"
+      verification_status: "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -316,6 +699,29 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      document_type: [
+        "national_id",
+        "passport",
+        "drivers_license",
+        "utility_bill",
+        "bank_statement",
+        "income_proof",
+        "collateral_document",
+        "other",
+      ],
+      kyc_status: ["not_started", "pending", "approved", "rejected"],
+      loan_status: [
+        "draft",
+        "submitted",
+        "under_review",
+        "approved",
+        "rejected",
+        "active",
+        "completed",
+        "defaulted",
+      ],
+      verification_status: ["pending", "verified", "rejected"],
+    },
   },
 } as const
