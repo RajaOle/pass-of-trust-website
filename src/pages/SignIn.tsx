@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -5,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Eye, EyeOff, Chrome, Facebook, Linkedin } from "lucide-react";
+import { Eye, EyeOff, Chrome } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const SignIn = () => {
@@ -163,7 +164,7 @@ const SignIn = () => {
               </div>
             </div>
 
-            {/* OAuth Buttons */}
+            {/* OAuth Buttons - Only Google */}
             <div className="space-y-3">
               <Button
                 type="button"
@@ -173,26 +174,6 @@ const SignIn = () => {
               >
                 <Chrome className="w-5 h-5 mr-3" />
                 Continue with Google
-              </Button>
-              
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full h-12 border-gray-300 hover:bg-gray-50"
-                onClick={() => handleOAuthSignIn("Facebook")}
-              >
-                <Facebook className="w-5 h-5 mr-3 text-blue-600" />
-                Continue with Facebook
-              </Button>
-              
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full h-12 border-gray-300 hover:bg-gray-50"
-                onClick={() => handleOAuthSignIn("LinkedIn")}
-              >
-                <Linkedin className="w-5 h-5 mr-3 text-blue-700" />
-                Continue with LinkedIn
               </Button>
             </div>
 
