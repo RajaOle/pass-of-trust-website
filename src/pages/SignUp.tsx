@@ -188,12 +188,14 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
+      const fullPhoneNumber = `${formData.selectedCountry.dialCode}${formData.phoneNumber}`;
+      
       const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
+        phone: fullPhoneNumber,
         password: formData.password,
         options: {
           data: {
-            phone: `${formData.selectedCountry.dialCode}${formData.phoneNumber}`,
+            email: formData.email,
           }
         }
       });
@@ -208,15 +210,15 @@ const SignUp = () => {
       }
 
       if (data.user) {
-        console.log('Complete phone number:', `${formData.selectedCountry.dialCode}${formData.phoneNumber}`);
+        console.log('Complete phone number:', fullPhoneNumber);
         
         toast({
           title: "Account created successfully!",
-          description: "Please check your email for a verification code.",
+          description: "Please check your phone for a verification code.",
         });
         
-        // Navigate to OTP verification page with email
-        navigate("/verify-otp", { state: { email: formData.email } });
+        // Navigate to OTP verification page with phone number
+        navigate("/verify-otp", { state: { phoneNumber: fullPhoneNumber } });
       }
     } catch (error) {
       toast({

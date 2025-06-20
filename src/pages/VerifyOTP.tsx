@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const VerifyOTP = () => {
@@ -16,15 +16,15 @@ const VerifyOTP = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Get email from location state or redirect if not available
-  const email = location.state?.email;
+  // Get phone number from location state or redirect if not available
+  const phoneNumber = location.state?.phoneNumber;
   
   useEffect(() => {
-    if (!email) {
+    if (!phoneNumber) {
       navigate("/signup");
       return;
     }
-  }, [email, navigate]);
+  }, [phoneNumber, navigate]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -50,9 +50,9 @@ const VerifyOTP = () => {
     
     try {
       const { data, error } = await supabase.auth.verifyOtp({
-        email,
+        phone: phoneNumber,
         token: otp,
-        type: 'signup'
+        type: 'sms'
       });
 
       if (error) {
@@ -66,8 +66,8 @@ const VerifyOTP = () => {
 
       if (data.user) {
         toast({
-          title: "Email Verified Successfully!",
-          description: "Your account has been verified. Welcome to Goodpass!",
+          title: "Phone Number Verified Successfully!",
+          description: "Your phone number has been verified. Welcome to Goodpass!",
         });
         
         // Navigate to onboarding
@@ -91,8 +91,8 @@ const VerifyOTP = () => {
     
     try {
       const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: email,
+        type: 'sms',
+        phone: phoneNumber,
       });
 
       if (error) {
@@ -106,7 +106,7 @@ const VerifyOTP = () => {
 
       toast({
         title: "Verification Code Sent",
-        description: "A new verification code has been sent to your email address.",
+        description: "A new verification code has been sent to your phone number.",
       });
       
       setResendCooldown(60);
@@ -126,7 +126,7 @@ const VerifyOTP = () => {
     navigate("/signup");
   };
 
-  if (!email) {
+  if (!phoneNumber) {
     return null;
   }
 
@@ -139,17 +139,17 @@ const VerifyOTP = () => {
           </Link>
         </div>
         <div className="flex justify-center mt-6">
-          <Mail className="h-16 w-16 text-blue-500" />
+          <Phone className="h-16 w-16 text-blue-500" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-          Check your email
+          Verify your phone number
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           We've sent a 6-digit verification code to{' '}
-          <span className="font-medium text-gray-900">{email}</span>
+          <span className="font-medium text-gray-900">{phoneNumber}</span>
         </p>
         <p className="mt-1 text-center text-xs text-gray-500">
-          Please check your inbox and enter the code below to verify your email address.
+          Please check your messages and enter the code below to verify your phone number.
         </p>
       </div>
 
@@ -158,7 +158,7 @@ const VerifyOTP = () => {
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl text-center">Enter verification code</CardTitle>
             <p className="text-center text-sm text-gray-600">
-              Enter the 6-digit code sent to your email
+              Enter the 6-digit code sent via SMS
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -186,12 +186,12 @@ const VerifyOTP = () => {
                 className="w-full bg-blue-600 hover:bg-blue-700"
                 disabled={isLoading || otp.length !== 6}
               >
-                {isLoading ? "Verifying..." : "Verify Email Address"}
+                {isLoading ? "Verifying..." : "Verify Phone Number"}
               </Button>
 
               <div className="text-center space-y-2">
                 <p className="text-sm text-gray-600">
-                  Didn't receive the email?
+                  Didn't receive the SMS?
                 </p>
                 <Button
                   variant="outline"
@@ -200,12 +200,12 @@ const VerifyOTP = () => {
                   className="w-full"
                 >
                   {resendCooldown > 0 
-                    ? `Resend email in ${resendCooldown}s` 
-                    : "Resend verification email"
+                    ? `Resend SMS in ${resendCooldown}s` 
+                    : "Resend verification SMS"
                   }
                 </Button>
                 <p className="text-xs text-gray-500 mt-2">
-                  Check your spam folder if you don't see the email in your inbox.
+                  Make sure your phone is within network coverage and try again.
                 </p>
               </div>
 
