@@ -9,6 +9,121 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      inquiries: {
+        Row: {
+          created_at: string | null
+          id: string
+          inquiry_type: string | null
+          subject_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          inquiry_type?: string | null
+          subject_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          inquiry_type?: string | null
+          subject_id?: string | null
+        }
+        Relationships: []
+      }
+      loans: {
+        Row: {
+          amount: number
+          created_at: string | null
+          due_date: string
+          loan_id: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          due_date: string
+          loan_id?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          due_date?: string
+          loan_id?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          loan_id: string | null
+          message: string
+          notification_id: string
+          status: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          loan_id?: string | null
+          message: string
+          notification_id?: string
+          status?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          loan_id?: string | null
+          message?: string
+          notification_id?: string
+          status?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_loan_id_fkey"
+            columns: ["loan_id"]
+            isOneToOne: false
+            referencedRelation: "loans"
+            referencedColumns: ["loan_id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          created_at: string | null
+          loan_id: string
+          payment_id: string
+          payment_proof_url: string
+        }
+        Insert: {
+          created_at?: string | null
+          loan_id: string
+          payment_id?: string
+          payment_proof_url: string
+        }
+        Update: {
+          created_at?: string | null
+          loan_id?: string
+          payment_id?: string
+          payment_proof_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_loan_id_fkey"
+            columns: ["loan_id"]
+            isOneToOne: false
+            referencedRelation: "loans"
+            referencedColumns: ["loan_id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -27,6 +142,54 @@ export type Database = {
           email?: string | null
           id?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string | null
+          data: Json | null
+          id: string
+          report_type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          report_type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          data?: Json | null
+          id?: string
+          report_type?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          id: string
+          key: string | null
+          updated_at: string | null
+          user_id: string | null
+          value: string | null
+        }
+        Insert: {
+          id?: string
+          key?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          value?: string | null
+        }
+        Update: {
+          id?: string
+          key?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          value?: string | null
         }
         Relationships: []
       }

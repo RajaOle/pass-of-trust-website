@@ -188,13 +188,10 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      const redirectUrl = `${window.location.origin}/onboarding`;
-      
       const { data, error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
-          emailRedirectTo: redirectUrl,
           data: {
             phone: `${formData.selectedCountry.dialCode}${formData.phoneNumber}`,
           }
@@ -215,11 +212,11 @@ const SignUp = () => {
         
         toast({
           title: "Account created successfully!",
-          description: "Please check your email to verify your account.",
+          description: "Please check your email for a verification code.",
         });
         
-        // Navigate to onboarding page
-        navigate("/onboarding");
+        // Navigate to OTP verification page with email
+        navigate("/verify-otp", { state: { email: formData.email } });
       }
     } catch (error) {
       toast({

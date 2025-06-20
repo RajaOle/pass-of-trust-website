@@ -13,6 +13,7 @@ import Pricing from "./pages/Pricing";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
+import VerifyOTP from "./pages/VerifyOTP";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/verify-otp" element={<VerifyOTP />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about-us/terms-of-use" element={<TermsOfUse />} />
