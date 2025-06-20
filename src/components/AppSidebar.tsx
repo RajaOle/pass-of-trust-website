@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,6 +23,7 @@ import {
   LogOut,
   BookOpen,
 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 interface AppSidebarProps {
   activeSection: string;
@@ -67,11 +69,29 @@ const menuItems = [
 ];
 
 export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) {
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Handle logout logic here
+  const handleLogout = async () => {
+    await signOut();
     navigate("/signin");
+  };
+
+  const getUserInitials = () => {
+    if (user?.email) {
+      return user.email.substring(0, 2).toUpperCase();
+    }
+    return "U";
+  };
+
+  const getUserDisplayName = () => {
+    if (user?.user_metadata?.full_name) {
+      return user.user_metadata.full_name;
+    }
+    if (user?.email) {
+      return user.email.split('@')[0];
+    }
+    return "User";
   };
 
   return (
@@ -79,11 +99,11 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
       <SidebarHeader className="p-6">
         <div className="flex items-center space-x-3">
           <Avatar className="h-12 w-12">
-            <AvatarImage src="/placeholder.svg" />
-            <AvatarFallback>JD</AvatarFallback>
+            <AvatarImage src={user?.user_metadata?.avatar_url || "/placeholder.svg"} />
+            <AvatarFallback>{getUserInitials()}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <h3 className="font-semibold text-sm">John Doe</h3>
+            <h3 className="font-semibold text-sm">{getUserDisplayName()}</h3>
             <p className="text-xs text-muted-foreground">Credits: 250</p>
           </div>
         </div>

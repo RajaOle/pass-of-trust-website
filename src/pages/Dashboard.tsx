@@ -10,6 +10,7 @@ import { Settings } from "@/components/Settings";
 import { Profiles } from "@/components/Profiles";
 import { ContactSupport } from "@/components/ContactSupport";
 import { EditProfile } from "@/components/EditProfile";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -38,17 +39,19 @@ const Dashboard = () => {
   };
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full">
-        <AppSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-        <main className="flex-1 p-6">
-          <div className="mb-4">
-            <SidebarTrigger />
-          </div>
-          {renderContent()}
-        </main>
-      </div>
-    </SidebarProvider>
+    <ProtectedRoute>
+      <SidebarProvider>
+        <div className="min-h-screen flex w-full">
+          <AppSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+          <main className="flex-1 p-6">
+            <div className="mb-4">
+              <SidebarTrigger />
+            </div>
+            {renderContent()}
+          </main>
+        </div>
+      </SidebarProvider>
+    </ProtectedRoute>
   );
 };
 

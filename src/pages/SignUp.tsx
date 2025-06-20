@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Phone, ArrowLeft } from "lucide-react";
 import { countries, Country } from "@/data/countries";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   email: string;
@@ -187,19 +188,39 @@ const SignUp = () => {
     setIsLoading(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const redirectUrl = `${window.location.origin}/onboarding`;
       
-      // Log the complete phone number for debugging
-      console.log('Complete phone number:', `${formData.selectedCountry.dialCode}${formData.phoneNumber}`);
-      
-      toast({
-        title: "Account created successfully!",
-        description: "Welcome to Goodpass. Redirecting to get started...",
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            phone: `${formData.selectedCountry.dialCode}${formData.phoneNumber}`,
+          }
+        }
       });
-      
-      // Navigate to onboarding page instead of just resetting form
-      navigate("/onboarding");
+
+      if (error) {
+        toast({
+          title: "Sign Up Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data.user) {
+        console.log('Complete phone number:', `${formData.selectedCountry.dialCode}${formData.phoneNumber}`);
+        
+        toast({
+          title: "Account created successfully!",
+          description: "Please check your email to verify your account.",
+        });
+        
+        // Navigate to onboarding page
+        navigate("/onboarding");
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -211,12 +232,33 @@ const SignUp = () => {
     }
   };
 
-  const handleGoogleSignUp = () => {
-    // In a real implementation, this would integrate with Google OAuth
-    toast({
-      title: "Google Sign Up",
-      description: "Google OAuth integration would be implemented here.",
-    });
+  const handleGoogleSignUp = async () => {
+    try {
+      setIsLoading(true);
+      
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/onboarding`
+        }
+      });
+
+      if (error) {
+        toast({
+          title: "Google Sign Up Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoBack = () => {
@@ -236,7 +278,7 @@ const SignUp = () => {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Or{' '}
-          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+          <Link to="/signin" className="font-medium text-blue-600 hover:text-blue-500">
             sign in to your existing account
           </Link>
         </p>
@@ -255,6 +297,7 @@ const SignUp = () => {
                 className="w-full"
                 onClick={handleGoogleSignUp}
                 type="button"
+                disabled={isLoading}
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>

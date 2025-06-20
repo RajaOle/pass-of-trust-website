@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Chrome } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,40 +32,112 @@ const SignIn = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Sign In Successful",
-        description: `Welcome back! Signed in with ${formData.emailOrPhone}`,
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.emailOrPhone,
+        password: formData.password,
       });
+
+      if (error) {
+        toast({
+          title: "Sign In Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data.user) {
+        toast({
+          title: "Sign In Successful",
+          description: `Welcome back! Signed in with ${formData.emailOrPhone}`,
+        });
+        
+        // Navigate to dashboard after successful sign in
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleOAuthSignIn = async (provider: string) => {
+    try {
+      setIsLoading(true);
       
-      // Navigate to dashboard after successful sign in
-      navigate("/dashboard");
-    }, 1500);
+      if (provider === "Google") {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: `${window.location.origin}/dashboard`
+          }
+        });
+
+        if (error) {
+          toast({
+            title: "Google Sign In Failed",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
+      } else {
+        toast({
+          title: `${provider} Sign In`,
+          description: `${provider} authentication is not yet configured.`,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleOAuthSignIn = (provider: string) => {
-    toast({
-      title: `${provider} Sign In`,
-      description: `Redirecting to ${provider} authentication...`,
-    });
-  };
-
-  const handleForgotPassword = () => {
+  const handleForgotPassword = async () => {
     if (!formData.emailOrPhone) {
       toast({
-        title: "Email or Phone Required",
-        description: "Please enter your email address or phone number first.",
+        title: "Email Required",
+        description: "Please enter your email address first.",
         variant: "destructive",
       });
       return;
     }
 
-    toast({
-      title: "Password Reset",
-      description: "Password reset instructions sent to your email or phone number.",
-    });
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(formData.emailOrPhone, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) {
+        toast({
+          title: "Password Reset Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Password Reset",
+        description: "Password reset instructions sent to your email.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -93,16 +166,16 @@ const SignIn = () => {
           <CardContent className="space-y-6">
             {/* Sign In Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Email/Phone Input */}
+              {/* Email Input */}
               <div className="space-y-2">
                 <Label htmlFor="emailOrPhone">
-                  Login by your email or phone
+                  Email address
                 </Label>
                 <Input
                   id="emailOrPhone"
                   name="emailOrPhone"
-                  type="text"
-                  placeholder="Enter your email address or phone number"
+                  type="email"
+                  placeholder="Enter your email address"
                   value={formData.emailOrPhone}
                   onChange={handleInputChange}
                   required
@@ -136,12 +209,13 @@ const SignIn = () => {
 
               {/* Forgot Password */}
               <div className="text-right">
-                <Link
-                  to="/forgot-password"
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
                   className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
                 >
                   Forgot password?
-                </Link>
+                </button>
               </div>
 
               {/* Sign In Button */}
@@ -171,6 +245,7 @@ const SignIn = () => {
                 variant="outline"
                 className="w-full h-12 border-gray-300 hover:bg-gray-50"
                 onClick={() => handleOAuthSignIn("Google")}
+                disabled={isLoading}
               >
                 <Chrome className="w-5 h-5 mr-3" />
                 Continue with Google
