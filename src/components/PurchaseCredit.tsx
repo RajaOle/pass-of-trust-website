@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,9 +37,7 @@ export const PurchaseCredit = () => {
       price: 50000,
       features: [
         "50 inquiry credits",
-        "Valid for 6 months",
-        "Email support",
-        "Instant activation"
+        "Valid for 6 months"
       ]
     },
     {
@@ -51,8 +48,6 @@ export const PurchaseCredit = () => {
       features: [
         "150 inquiry credits",
         "Valid for 12 months",
-        "Priority email support",
-        "Instant activation",
         "6% savings"
       ]
     },
@@ -64,7 +59,6 @@ export const PurchaseCredit = () => {
         "250 inquiry credits",
         "Valid for 18 months",
         "Priority support",
-        "Instant activation",
         "10% savings"
       ]
     },
@@ -76,7 +70,6 @@ export const PurchaseCredit = () => {
         "500 inquiry credits",
         "Valid for 24 months",
         "Dedicated support",
-        "Instant activation",
         "15% savings"
       ]
     }
