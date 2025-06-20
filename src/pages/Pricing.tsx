@@ -31,11 +31,11 @@ const Pricing = () => {
               </Link>
             </nav>
             <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
-              <Button variant="ghost" className="text-gray-700 hover:text-blue-600 text-sm xl:text-base">
-                Login
+              <Button variant="ghost" className="text-gray-700 hover:text-blue-600 text-sm xl:text-base" asChild>
+                <Link to="/signin">Login</Link>
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm xl:text-base">
-                Sign Up
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm xl:text-base" asChild>
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
           </div>

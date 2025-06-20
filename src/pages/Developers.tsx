@@ -29,11 +29,11 @@ const Developers = () => {
               </Link>
             </nav>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700 hover:text-blue-600">
-                Login
+              <Button variant="ghost" className="text-gray-700 hover:text-blue-600" asChild>
+                <Link to="/signin">Login</Link>
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                Sign Up
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white" asChild>
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
           </div>
