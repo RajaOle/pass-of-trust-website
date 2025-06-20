@@ -1,20 +1,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Search, Users, FileCheck, ArrowLeft } from "lucide-react";
+import { Search, Users, FileCheck, ArrowLeft, CreditCard, Shield } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { InquiryButton } from "@/components/InquiryButton";
 
 const MakeInquiries = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [inquiryType, setInquiryType] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Inquiry submitted:", { searchQuery, inquiryType });
-  };
+  const [currentCredits] = useState(25); // Mock current credits
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -42,55 +35,49 @@ const MakeInquiries = () => {
           </p>
         </div>
 
-        {/* Search Form */}
+        {/* Credit Balance Card */}
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Available Credits</h3>
+                  <p className="text-2xl font-bold text-blue-600">{currentCredits}</p>
+                  <p className="text-sm text-gray-600">Goodpass: 1 credit • Combined: 3 credits</p>
+                </div>
+              </div>
+              <Link to="/dashboard">
+                <Button variant="outline">
+                  Buy More Credits
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Search Action */}
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Search className="w-5 h-5 mr-2 text-blue-600" />
-              Search Financial History
+              Start Your Search
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="search">Search by Name, Phone, or Email</Label>
-                <Input
-                  id="search"
-                  type="text"
-                  placeholder="Enter name, phone number, or email address"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="inquiry-type">Inquiry Type</Label>
-                <select
-                  id="inquiry-type"
-                  value={inquiryType}
-                  onChange={(e) => setInquiryType(e.target.value)}
-                  className="w-full h-10 px-3 py-2 border border-input bg-background rounded-md text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                >
-                  <option value="">Select inquiry type</option>
-                  <option value="lending">Lending Decision</option>
-                  <option value="partnership">Business Partnership</option>
-                  <option value="employment">Employment Verification</option>
-                  <option value="rental">Rental Application</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                <Search className="w-4 h-4 mr-2" />
-                Search Records
-              </Button>
-            </form>
+            <div className="text-center py-8">
+              <p className="text-gray-600 mb-6">
+                Begin your financial reputation inquiry with our comprehensive search system.
+              </p>
+              <InquiryButton />
+            </div>
           </CardContent>
         </Card>
 
-        {/* Information Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
@@ -117,6 +104,38 @@ const MakeInquiries = () => {
                   <h3 className="font-semibold text-gray-900 mb-2">Comprehensive Reports</h3>
                   <p className="text-gray-600 text-sm">
                     Get detailed insights into loan history, repayment patterns, and financial reliability from multiple sources.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-6 h-6 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Secure & Compliant</h3>
+                  <p className="text-gray-600 text-sm">
+                    All searches are conducted with proper consent and comply with data protection regulations.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Search className="w-6 h-6 text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Multi-Source Search</h3>
+                  <p className="text-gray-600 text-sm">
+                    Choose between Goodpass-only searches or enhanced searches with third-party data sources.
                   </p>
                 </div>
               </div>
