@@ -38,6 +38,7 @@ export const usePhoneVerification = () => {
         step: 'verify',
         phoneNumber,
         isLoading: false,
+        attemptsRemaining: 3, // Reset attempts when sending new code
       }));
 
       toast({
@@ -93,7 +94,7 @@ export const usePhoneVerification = () => {
       }));
 
       if (newAttempts <= 0) {
-        setState(prev => ({ ...prev, step: 'input' }));
+        setState(prev => ({ ...prev, step: 'input', attemptsRemaining: 3 }));
         toast({
           title: "Too many attempts",
           description: "Please request a new verification code",
