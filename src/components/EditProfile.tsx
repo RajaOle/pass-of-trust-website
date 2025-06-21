@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useKYC } from "@/hooks/useKYC";
+import { PhoneVerification } from "@/components/PhoneVerification";
 
 interface ProfileFormData {
   fullName: string;
@@ -26,7 +27,7 @@ interface ProfileFormData {
 
 export const EditProfile = () => {
   const { user } = useAuth();
-  const { kycProfile, loading: kycLoading } = useKYC();
+  const { kycProfile, loading: kycLoading, updateKYCProfile } = useKYC();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [kycVerified, setKycVerified] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -100,6 +101,21 @@ export const EditProfile = () => {
     }, 2000);
   };
 
+  const handlePhoneVerificationComplete = async (phoneNumber: string) => {
+    try {
+      if (kycProfile) {
+        await updateKYCProfile({
+          phone_number: phoneNumber,
+          phone_verified: true,
+        });
+        toast.success("Phone number verified and saved successfully!");
+      }
+    } catch (error) {
+      console.error('Error updating phone verification:', error);
+      toast.error("Failed to save phone verification status");
+    }
+  };
+
   const onSubmit = (data: ProfileFormData) => {
     console.log("Form data:", data);
     console.log("Uploaded file:", uploadedFile);
@@ -153,16 +169,11 @@ export const EditProfile = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Phone Number</Label>
-              <div className="p-3 bg-gray-50 border rounded-md">
-                <p className="text-sm font-medium">{kycProfile?.phone_number || 'Not provided'}</p>
-                {kycProfile?.phone_verified && (
-                  <Badge variant="outline" className="mt-1 text-xs">
-                    <CheckCircle className="h-3 w-3 mr-1" />
-                    Verified
-                  </Badge>
-                )}
-              </div>
+              <PhoneVerification
+                initialPhoneNumber={kycProfile?.phone_number}
+                isVerified={kycProfile?.phone_verified}
+                onVerificationComplete={handlePhoneVerificationComplete}
+              />
             </div>
           </div>
         </CardContent>

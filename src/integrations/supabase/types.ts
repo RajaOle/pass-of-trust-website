@@ -160,6 +160,9 @@ export type Database = {
           last_name: string | null
           national_id_number: string | null
           phone_number: string
+          phone_verification_attempts: number | null
+          phone_verification_code: string | null
+          phone_verification_expires_at: string | null
           phone_verified: boolean | null
           postal_code: string | null
           state: string | null
@@ -180,6 +183,9 @@ export type Database = {
           last_name?: string | null
           national_id_number?: string | null
           phone_number: string
+          phone_verification_attempts?: number | null
+          phone_verification_code?: string | null
+          phone_verification_expires_at?: string | null
           phone_verified?: boolean | null
           postal_code?: string | null
           state?: string | null
@@ -200,6 +206,9 @@ export type Database = {
           last_name?: string | null
           national_id_number?: string | null
           phone_number?: string
+          phone_verification_attempts?: number | null
+          phone_verification_code?: string | null
+          phone_verification_expires_at?: string | null
           phone_verified?: boolean | null
           postal_code?: string | null
           state?: string | null
